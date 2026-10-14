@@ -283,7 +283,7 @@ test('real seed/ folder is valid', async () => { await expect(loadSeed(REPO_SEED
   - `GET /api/portfolio` → `Portfolio`, or 503 `{ error: { code: 'NOT_SEEDED', ... } }`
   - `server.ts`: `loadConfig(process.env)` → pool → `createGeminiModel` (Task 7; until then a stub that throws) → `createApp` → `listen(config.port)`. Build script: `tsup`. Start: `node dist/server.js`.
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 test('health returns version', async () => {
@@ -309,10 +309,10 @@ test('CORS allows WEB_ORIGIN and localhost:5173 only', async () => {
 test('cache serves stale-free value within ttl and reloads after', async () => { /* fake now(); load called 1× then 2× */ });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/api`. Expected: FAIL.
-- [ ] **Step 3: Implement.** Assemble `getPortfolio` with 4 queries: team + contacts, members, member skills joined with skills, and projects joined with project_members and members. Build the result in JS. Don't write one giant JSON-aggregation query; small queries are easier to read on a slide.
-- [ ] **Step 4: Run** `npm test -w @vq/api && npm run build -w @vq/api`. Expected: PASS, and `apps/api/dist/server.js` exists.
-- [ ] **Step 5: Commit** `git commit -am "feat(api): app skeleton, health with version, portfolio endpoint"`
+- [x] **Step 2: Run** `npm test -w @vq/api`. Expected: FAIL.
+- [x] **Step 3: Implement.** Assemble `getPortfolio` with 4 queries: team + contacts, members, member skills joined with skills, and projects joined with project_members and members. Build the result in JS. Don't write one giant JSON-aggregation query; small queries are easier to read on a slide.
+- [x] **Step 4: Run** `npm test -w @vq/api && npm run build -w @vq/api`. Expected: PASS, and `apps/api/dist/server.js` exists.
+- [x] **Step 5: Commit** `git commit -am "feat(api): app skeleton, health with version, portfolio endpoint"`
 
 ---
 
