@@ -22,7 +22,7 @@ describe('getPortfolio', () => {
 
   test('maps team, contacts and arrays', async () => {
     const p = (await getPortfolio(pool))!;
-    expect(p.team).toEqual({ name: 'Fixture Team', tagline: 'Fixture tagline', concept: null, highlights: ['h1', 'h2'] });
+    expect(p.team).toEqual({ name: 'VISIONQUEST', tagline: 'Fixture tagline', concept: null, highlights: ['h1', 'h2'] });
     expect(p.contacts.map((c) => c.type)).toEqual(['email', 'github']);
     expect(p.teamProjects[0]!.tech).toEqual(['React', 'Express']);
   });

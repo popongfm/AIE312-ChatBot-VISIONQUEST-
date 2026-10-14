@@ -22,7 +22,7 @@ describe('GET /api/portfolio', () => {
   test('portfolio returns seeded data', async () => {
     const res = await request(app).get('/api/portfolio');
     expect(res.status).toBe(200);
-    expect(res.body.team.name).toBe('Fixture Team');
+    expect(res.body.team.name).toBe('VISIONQUEST');
     expect(res.body.members.map((m: Member) => m.slug)).toEqual(['mickie', 'art']);
     expect(res.body.members[0].skills[0]).toEqual({
       name: expect.any(String),
