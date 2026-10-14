@@ -518,7 +518,7 @@ test('clientId in query string is not accepted', async () => {
   - Route order: `requireClientId` → limiters → zod body `{ content: string.trim().min(1).max(1000) }` (400 `BAD_CONTENT`) → ownership (404) → insert user message → title → `portfolio.get()` (null → SSE error `AI_ERROR`) → SSE headers + `flushHeaders` → stream tokens → on success `done`. A disconnect is detected with `res.on('close')` while `!res.writableEnded`; it aborts through an `AbortController` passed as `signal`, and partial text, if non-empty, is still saved. The `model` row is saved with its citations. Errors: `AiRateLimitError` → `error` `RATE_LIMITED`; anything else → `error` `AI_ERROR`, logged with `console.error`. In both cases the user row stays and no model row is written.
   - SSE wire format: `event: <type>\ndata: <JSON without the type field>\n\n`.
 
-- [ ] **Step 1: Write failing tests** (`app` built with `fakeModel`, DB seeded from fixtures)
+- [x] **Step 1: Write failing tests** (`app` built with `fakeModel`, DB seeded from fixtures)
 
 ```ts
 test('streams tokens then done, persists both rows with citations', async () => {
@@ -551,10 +551,10 @@ test('second message sends prior turns as history', async () => { /* after one e
 
 `parseSseText` lives in `test/helpers/sse.ts`. It is a 10-line splitter for test assertions only; the web has its own parser in Task 10.
 
-- [ ] **Step 2: Run** `npm test -w @vq/api -- messages`. Expected: FAIL.
-- [ ] **Step 3: Implement** the limiters and the route.
-- [ ] **Step 4: Run** `npm test -w @vq/api`. Expected: all PASS. Manual check with real Gemini: `npm run dev -w @vq/api` (tsx watch), then `curl -N -X POST localhost:3000/api/conversations/<id>/messages -H 'X-Client-Id: <uuid>' -H 'Content-Type: application/json' -d '{"content":"ทีมนี้ถนัดอะไร"}'`. Expected: `event: token` lines arrive progressively, not all at once.
-- [ ] **Step 5: Commit** `git commit -am "feat(api): streaming chat endpoint with rate limits and fallback-aware errors"`
+- [x] **Step 2: Run** `npm test -w @vq/api -- messages`. Expected: FAIL.
+- [x] **Step 3: Implement** the limiters and the route.
+- [x] **Step 4: Run** `npm test -w @vq/api`. Expected: all PASS. Manual check with real Gemini: `npm run dev -w @vq/api` (tsx watch), then `curl -N -X POST localhost:3000/api/conversations/<id>/messages -H 'X-Client-Id: <uuid>' -H 'Content-Type: application/json' -d '{"content":"ทีมนี้ถนัดอะไร"}'`. Expected: `event: token` lines arrive progressively, not all at once.
+- [x] **Step 5: Commit** `git commit -am "feat(api): streaming chat endpoint with rate limits and fallback-aware errors"`
 
 ---
 
