@@ -369,7 +369,7 @@ test('incomplete member renders without crashing', () => {          // Review Fo
   - `buildHistory(prior: { role: Role; content: string }[], newContent: string): HistoryTurn[]`. `prior` is oldest-first, and the caller passes at most 10. Append the new user message, drop leading `model` turns, and merge adjacent same-role turns with `\n\n`. The result alternates and ends with `user`.
   - `makeTitle(content: string): string` keeps the first 40 graphemes via `new Intl.Segmenter('th', { granularity: 'grapheme' })` and appends `…` if cut. Whitespace is trimmed and collapsed first.
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 const ms = [
@@ -392,16 +392,16 @@ test('leading model turns dropped, adjacent users merged, ends with user', () =>
 });
 
 test('title cuts at grapheme boundary', () => {
-  const t = makeTitle('น้ำ'.repeat(30));
+  const t = makeTitle('น้ำ'.repeat(60));
   expect(t.endsWith('…')).toBe(true);
   expect([...new Intl.Segmenter('th', { granularity: 'grapheme' }).segment(t.slice(0, -1))]).toHaveLength(40);
 });
 test('short title unchanged', () => expect(makeTitle('  ทีมนี้ถนัดอะไร  ')).toBe('ทีมนี้ถนัดอะไร'));
 ```
-- [ ] **Step 2: Run** `npm test -w @vq/api -- citations history title`. Expected: FAIL.
-- [ ] **Step 3: Implement** the three modules.
-- [ ] **Step 4: Run** the same command. Expected: PASS.
-- [ ] **Step 5: Commit** `git commit -am "feat(api): citation detection, history normalisation, grapheme-safe titles"`
+- [x] **Step 2: Run** `npm test -w @vq/api -- citations history title`. Expected: FAIL.
+- [x] **Step 3: Implement** the three modules.
+- [x] **Step 4: Run** the same command. Expected: PASS.
+- [x] **Step 5: Commit** `git commit -am "feat(api): citation detection, history normalisation, grapheme-safe titles"`
 
 ---
 
