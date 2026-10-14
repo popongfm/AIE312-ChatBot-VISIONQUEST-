@@ -720,7 +720,7 @@ test('NOT_SEEDED error shows retry', async () => {                          // R
   - QuestLog: amber `COMPLETED` badge + party nicknames
   - Chat: model bubbles in `HudPanel tone="cyan"` with the Oracle avatar, user bubbles amber "player", and `"analyzing…"` shown with ScanLine
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 test('BBoxFrame shows label and confidence', () => { render(<BBoxFrame label="CLASS: AI Engineer" confidence={0.93}>x</BBoxFrame>); expect(screen.getByText('CLASS: AI Engineer · conf 0.93')).toBeInTheDocument(); });
@@ -728,10 +728,10 @@ test('ScanLine hidden under reduced motion', () => { mockMatchMedia(true); const
 test('StatBar exposes meter semantics', () => { render(<StatBar name="Python" level={4} />); expect(screen.getByRole('meter', { name: 'Python' })).toHaveAttribute('aria-valuenow', '4'); });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/web -- hud`. Expected: FAIL.
-- [ ] **Step 3: Implement** the HUD components and restyle both pages. Read the `frontend-design` skill first.
-- [ ] **Step 4: Run** `npm test -w @vq/web && npm run build -w @vq/web`. Expected: all earlier web tests still PASS. Then verify visually: take screenshots of `/` and `/chat` at 1440 px and 360 px with Playwright (`/opt/pw-browsers/chromium` in the cloud workspace), check there is no horizontal scroll, and check the same with emulated `prefers-reduced-motion: reduce`.
-- [ ] **Step 5: Commit** `git commit -am "feat(web): Quest × Vision HUD theme"`
+- [x] **Step 2: Run** `npm test -w @vq/web -- hud`. Expected: FAIL.
+- [x] **Step 3: Implement** the HUD components and restyle both pages. Read the `frontend-design` skill first.
+- [x] **Step 4: Run** `npm test -w @vq/web && npm run build -w @vq/web`. Expected: all earlier web tests still PASS. Then verify visually: take screenshots of `/` and `/chat` at 1440 px and 360 px with Playwright (`/opt/pw-browsers/chromium` in the cloud workspace), check there is no horizontal scroll, and check the same with emulated `prefers-reduced-motion: reduce`.
+- [x] **Step 5: Commit** `git commit -am "feat(web): Quest × Vision HUD theme"`
 
 ---
 
