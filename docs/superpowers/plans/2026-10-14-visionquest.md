@@ -669,7 +669,7 @@ test('?ask is sent once and removed from URL', async () => {      // Review Focu
   - `askHref(nickname: string): string` returns `` `/chat?ask=${encodeURIComponent(`${nickname} ทำโปรเจกต์อะไรบ้าง และถนัดอะไร`)}` ``. It lives in `MemberDetail.tsx` and is exported for the test.
   - The page fires `api.getHealth()` on mount and ignores the result. Sections in order: Hero (`"คุยกับ Oracle"` → `/chat`), Concept (concept + highlights), Party (`MemberCard` per member, wrapper `id="member-<slug>"`), clicking a card opens `MemberDetail` (Recharts `RadarChart` of skills + projects + an ask link labelled `"ถาม Oracle เกี่ยวกับ <nickname>"`), QuestLog (team projects with members and contribution), and Contact. On a hash such as `#member-mickie` it scrolls to that card after load. Error state shows the message and a retry button.
 
-- [ ] **Step 1: Write failing tests** (mock `api`)
+- [x] **Step 1: Write failing tests** (mock `api`)
 
 ```ts
 test('renders team, all members with anchors, team projects, contacts', async () => {
@@ -693,10 +693,10 @@ test('NOT_SEEDED error shows retry', async () => {                          // R
 });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/web`. Expected: FAIL.
-- [ ] **Step 3: Implement** the page and components with plain Tailwind.
-- [ ] **Step 4: Run** `npm test -w @vq/web`. Expected: PASS. Manual check: a 📎 chip in chat lands on the right member card.
-- [ ] **Step 5: Commit** `git commit -am "feat(web): portfolio page backed by /api/portfolio"`
+- [x] **Step 2: Run** `npm test -w @vq/web`. Expected: FAIL.
+- [x] **Step 3: Implement** the page and components with plain Tailwind.
+- [x] **Step 4: Run** `npm test -w @vq/web`. Expected: PASS. Manual check: a 📎 chip in chat lands on the right member card.
+- [x] **Step 5: Commit** `git commit -am "feat(web): portfolio page backed by /api/portfolio"`
 
 ---
 
