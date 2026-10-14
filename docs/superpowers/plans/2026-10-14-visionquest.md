@@ -581,7 +581,7 @@ test('second message sends prior turns as history', async () => { /* after one e
     - `sendMessage(id: string, content: string, onEvent: (e: ChatStreamEvent) => void, signal?: AbortSignal): Promise<{ completed: boolean }>`. `completed` is `true` only if a `done` or `error` event arrived.
   - All conversation calls send `X-Client-Id`. A non-OK response throws `ApiRequestError` built from the error JSON. The base URL is `import.meta.env.VITE_API_URL ?? 'http://localhost:3000'`.
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 test('parser handles an event split across chunks', () => {
@@ -595,10 +595,10 @@ test('sendMessage sends X-Client-Id and throws ApiRequestError on 429', async ()
 test('getClientId is stable and survives storage errors', () => { /* same value twice; with localStorage.getItem throwing → still returns a uuid */ });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/web`. Expected: FAIL.
-- [ ] **Step 3: Implement.** `sendMessage` reads `res.body.getReader()` with a `TextDecoder` and feeds the parser.
-- [ ] **Step 4: Run** `npm test -w @vq/web && npm run build -w @vq/web`. Expected: PASS and a `dist/` folder.
-- [ ] **Step 5: Commit** `git commit -am "feat(web): vite app, router, API client, SSE parser, SPA rewrite"`
+- [x] **Step 2: Run** `npm test -w @vq/web`. Expected: FAIL.
+- [x] **Step 3: Implement.** `sendMessage` reads `res.body.getReader()` with a `TextDecoder` and feeds the parser.
+- [x] **Step 4: Run** `npm test -w @vq/web && npm run build -w @vq/web`. Expected: PASS and a `dist/` folder.
+- [x] **Step 5: Commit** `git commit -am "feat(web): vite app, router, API client, SSE parser, SPA rewrite"`
 
 ---
 
