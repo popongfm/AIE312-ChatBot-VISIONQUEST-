@@ -8,10 +8,13 @@ export function CitationChips({ slugs, members }: { slugs: string[]; members: Me
   });
   if (known.length === 0) return null;
   return (
-    <ul className="mt-2 flex flex-wrap gap-2">
+    <ul className="mt-3 flex flex-wrap gap-2 border-t border-scan/15 pt-3">
       {known.map((m) => (
-        <li key={m.slug}>
-          <a href={`/#member-${m.slug}`} className="inline-block rounded-full border px-2 py-0.5 text-sm">
+        <li key={m.slug} className="min-w-0 max-w-full">
+          <a
+            href={`/#member-${m.slug}`}
+            className="inline-flex min-h-10 max-w-full items-center break-words border border-scan/40 bg-scan/5 px-2.5 font-mono text-xs text-scan transition-colors motion-reduce:transition-none hover:border-scan hover:bg-scan/15 sm:min-h-8"
+          >
             📎 {displayName(m)}
           </a>
         </li>
