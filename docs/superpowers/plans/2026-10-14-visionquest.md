@@ -325,7 +325,7 @@ test('cache serves stale-free value within ttl and reloads after', async () => {
 - Consumes: `Portfolio`, `displayName` (T1)
 - Produces: `buildSystemInstruction(p: Portfolio): string`, a pure function. The rule block is copied verbatim from spec §5.3, rules 1–6, with the persona line `คุณคือ "Oracle" ผู้ช่วย AI ของทีม VISIONQUEST`. After the rules comes `<portfolio>…</portfolio>` with sections `## ทีม`, `## ช่องทางติดต่อ`, `## สมาชิก`, `## ผลงานของทีม`. Each member heading is `### <displayName> (slug: <slug>) — <role>`. Skills are written as `<name> (<level>/5)`. A project line includes `(ส่วนที่ทำ: <contribution>)` when present. Empty lists render `- ไม่มีข้อมูล`.
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 const p = fixturePortfolio(); // 3 members, 1 team project, 2 contacts
@@ -350,10 +350,10 @@ test('incomplete member renders without crashing', () => {          // Review Fo
 });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/api -- promptBuilder`. Expected: FAIL.
-- [ ] **Step 3: Implement** `buildSystemInstruction`.
-- [ ] **Step 4: Run** the same command. Expected: PASS.
-- [ ] **Step 5: Commit** `git commit -am "feat(api): portfolio-grounded system instruction"`
+- [x] **Step 2: Run** `npm test -w @vq/api -- promptBuilder`. Expected: FAIL.
+- [x] **Step 3: Implement** `buildSystemInstruction`.
+- [x] **Step 4: Run** the same command. Expected: PASS.
+- [x] **Step 5: Commit** `git commit -am "feat(api): portfolio-grounded system instruction"`
 
 ---
 
