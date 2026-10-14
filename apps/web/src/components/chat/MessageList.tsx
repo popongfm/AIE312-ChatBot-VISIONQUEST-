@@ -48,7 +48,7 @@ export function MessageList({ messages, members, streamingText, busy, onResend }
           <div className="min-w-0 max-w-[85%] rounded border p-3">
             <div data-slot="content" className="min-w-0 max-w-full whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
               {streamingText}
-              <span data-slot="cursor" aria-hidden="true" className="ml-0.5 inline-block animate-pulse">
+              <span data-slot="cursor" aria-hidden="true" className="ml-0.5 inline-block motion-safe:animate-pulse">
                 ▍
               </span>
             </div>

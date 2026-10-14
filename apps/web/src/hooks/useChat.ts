@@ -20,6 +20,7 @@ export function useChat() {
   const [messages, setMessages] = useState<UiMessage[]>([]);
   const [streamingText, setStreamingText] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [loadingMessages, setLoadingMessages] = useState(false);
 
   const activeIdRef = useRef<string | null>(null);
   const busyRef = useRef(false);
@@ -65,6 +66,7 @@ export function useChat() {
       const token = ++selectToken.current;
       activate(id);
       setMessages([]);
+      setLoadingMessages(true);
       try {
         const list = await api.getMessages(id);
         if (token !== selectToken.current) return;
@@ -80,6 +82,8 @@ export function useChat() {
         if (token === selectToken.current) {
           setMessages([{ key: nextKey(), role: 'error', content: COPY_CONNECTION_LOST, citedMembers: [] }]);
         }
+      } finally {
+        if (token === selectToken.current) setLoadingMessages(false);
       }
     },
     [activate],
@@ -88,6 +92,7 @@ export function useChat() {
   const newConversation = useCallback(async () => {
     const created = await api.createConversation();
     selectToken.current++;
+    setLoadingMessages(false);
     setConversations((prev) => [created, ...prev.filter((c) => c.id !== created.id)]);
     activate(created.id);
     setMessages([]);
@@ -100,6 +105,8 @@ export function useChat() {
       if (!text || busyRef.current) return;
       busyRef.current = true;
       setBusy(true);
+      selectToken.current++; // discard any pending history load so it cannot wipe this exchange
+      setLoadingMessages(false);
       const ctrl = new AbortController();
       abortRef.current = ctrl;
       const pushError = (message: string) =>
@@ -154,5 +161,5 @@ export function useChat() {
     [newConversation],
   );
 
-  return { conversations, listLoaded, activeId, messages, streamingText, busy, select, newConversation, send };
+  return { conversations, listLoaded, activeId, messages, streamingText, busy, loadingMessages, select, newConversation, send };
 }

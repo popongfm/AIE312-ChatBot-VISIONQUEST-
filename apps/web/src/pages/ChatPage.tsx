@@ -12,7 +12,7 @@ const SIDEBAR_ID = 'conversation-sidebar';
 const NO_MEMBERS: Member[] = [];
 
 export function ChatPage() {
-  const { conversations, listLoaded, activeId, messages, streamingText, busy, select, newConversation, send } =
+  const { conversations, listLoaded, activeId, messages, streamingText, busy, loadingMessages, select, newConversation, send } =
     useChat();
   const [members, setMembers] = useState<Member[]>(NO_MEMBERS);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -91,7 +91,7 @@ export function ChatPage() {
           busy={busy}
           onResend={(content) => void send(content)}
         />
-        {messages.length === 0 && !busy ? (
+        {messages.length === 0 && !busy && !loadingMessages ? (
           <SuggestedQuestions members={members} onPick={(q) => void send(q)} />
         ) : null}
         <Composer busy={busy} onSend={(t) => void send(t)} />

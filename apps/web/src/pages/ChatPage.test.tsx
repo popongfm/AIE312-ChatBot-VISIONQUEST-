@@ -156,7 +156,10 @@ describe('ChatPage', () => {
     const { container } = renderChat();
     await userEvent.type(await screen.findByRole('textbox', { name: /ข้อความ/ }), 'hi{Enter}');
     await screen.findByText('ครึ่งๆ');
-    expect(container.querySelector('[aria-hidden="true"].animate-pulse, [data-slot="cursor"][aria-hidden="true"]')).not.toBeNull();
+    const cursor = container.querySelector('[data-slot="cursor"][aria-hidden="true"]')!;
+    expect(cursor).not.toBeNull();
+    expect(cursor.className).toMatch(/motion-safe:animate-pulse/);
+    expect(cursor.className.split(/\s+/)).not.toContain('animate-pulse');
     expect(screen.queryByText('analyzing…')).toBeNull();
   });
 
@@ -186,5 +189,22 @@ describe('ChatPage', () => {
     renderChat();
     await userEvent.type(await screen.findByRole('textbox', { name: /ข้อความ/ }), 'q{Enter}');
     expect(await screen.findByText('Oracle ขัดข้อง ลองใหม่อีกครั้ง')).toBeInTheDocument();
+  });
+
+  test('a message sent during history load is not wiped when the history resolves', async () => {
+    let resolveHistory!: (v: Awaited<ReturnType<typeof api.getMessages>>) => void;
+    m.listConversations.mockResolvedValue([{ id: 'b', title: 'ล่าสุด', createdAt: 'x' }]);
+    m.getMessages.mockImplementation(() => new Promise((r) => (resolveHistory = r)));
+    answerWith('คำตอบใหม่');
+    renderChat();
+    await waitFor(() => expect(m.getMessages).toHaveBeenCalledWith('b'));
+    expect(screen.queryByRole('button', { name: 'ทีมนี้ถนัดอะไร' })).toBeNull(); // hidden while loading
+    await userEvent.type(screen.getByRole('textbox', { name: /ข้อความ/ }), 'คำถามใหม่{Enter}');
+    await screen.findByText('คำตอบใหม่');
+    resolveHistory([]);
+    await waitFor(() => expect(m.getMessages).toHaveBeenCalledTimes(1));
+    await new Promise((r) => setTimeout(r, 0));
+    expect(screen.getByText('คำถามใหม่')).toBeInTheDocument();
+    expect(screen.getByText('คำตอบใหม่')).toBeInTheDocument();
   });
 });
