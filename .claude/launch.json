@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "api",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "DATABASE_URL=postgres://postgres:postgres@localhost:5432/visionquest GEMINI_API_KEY=preview-no-key GEMINI_MODEL=preview-no-model WEB_ORIGIN=http://localhost:5173 PORT=3000 node apps/api/dist/server.js"],
+      "port": 3000
+    },
+    {
+      "name": "web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "-w", "@vq/web", "--", "--port", "5173", "--strictPort"],
+      "port": 5173
+    }
+  ]
+}
