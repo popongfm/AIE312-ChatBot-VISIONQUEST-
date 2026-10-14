@@ -235,7 +235,7 @@ test('member_skills.level must be 1..5', async () => { /* insert level 6 → rej
   - `applySeed(pool: pg.Pool, data: SeedData): Promise<void>` runs in a single transaction and upserts by `slug` / `name` / `title`. It deletes members, skills and projects that are absent from the data. It replaces the `member_skills` and `project_members` rows for each seeded member and project. The `team` table holds exactly one row (delete then insert) and `team_contacts` is fully replaced.
   - Script `seed` runs `tsx src/db/seed.ts` (reads `DATABASE_URL`; seed dir is the repo `seed/`).
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 test('applySeed twice keeps row counts', async () => {
@@ -257,10 +257,10 @@ test('team project links members by slug', async () => { /* project_members row 
 test('real seed/ folder is valid', async () => { await expect(loadSeed(REPO_SEED_DIR)).resolves.toBeDefined(); });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/api -- seed`. Expected: FAIL.
-- [ ] **Step 3: Implement `seed.ts`.** Fill `mickie.json` with the clearly marked sample values in spec §4.3 shape; Mickie replaces them with real data in Task 16. `team.json` uses `name: "VISIONQUEST"` and one team project, "VISIONQUEST Portfolio Chatbot", tech `["React","Express","PostgreSQL","Gemini"]`, linking all 3 slugs.
-- [ ] **Step 4: Run** `npm test -w @vq/api`. Expected: PASS. Also run `DATABASE_URL=postgres://postgres:postgres@localhost:5432/visionquest npm run migrate -w @vq/api && npm run seed -w @vq/api`. Expected: exits 0.
-- [ ] **Step 5: Commit** `git commit -am "feat(api): idempotent seed loader + seed files"`
+- [x] **Step 2: Run** `npm test -w @vq/api -- seed`. Expected: FAIL.
+- [x] **Step 3: Implement `seed.ts`.** Fill `mickie.json` with the clearly marked sample values in spec §4.3 shape; Mickie replaces them with real data in Task 16. `team.json` uses `name: "VISIONQUEST"` and one team project, "VISIONQUEST Portfolio Chatbot", tech `["React","Express","PostgreSQL","Gemini"]`, linking all 3 slugs.
+- [x] **Step 4: Run** `npm test -w @vq/api`. Expected: PASS. Also run `DATABASE_URL=postgres://postgres:postgres@localhost:5432/visionquest npm run migrate -w @vq/api && npm run seed -w @vq/api`. Expected: exits 0.
+- [x] **Step 5: Commit** `git commit -am "feat(api): idempotent seed loader + seed files"`
 
 ---
 
