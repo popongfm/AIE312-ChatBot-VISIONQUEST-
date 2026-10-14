@@ -20,7 +20,7 @@ export function QuestLog({ projects }: { projects: TeamProject[] }) {
             {p.tech.length > 0 ? (
               <ul className="flex flex-wrap gap-1.5">
                 {p.tech.map((t) => (
-                  <li key={t} translate="no" className="max-w-full break-all border border-scan/30 px-2 py-0.5 font-mono text-xs text-scan">
+                  <li key={t} translate="no" className="max-w-full break-all border border-scan/30 px-2 py-0.5 text-xs text-scan">
                     {t}
                   </li>
                 ))}

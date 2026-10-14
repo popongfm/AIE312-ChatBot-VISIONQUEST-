@@ -117,3 +117,19 @@ describe('HudPanel', () => {
     expect(screen.getByText('inside').closest('[data-tone]')).toHaveAttribute('data-tone', 'amber');
   });
 });
+
+describe('Thai-safe typography guard', () => {
+  // Plex Mono has no Thai glyphs and letter-spacing splits Thai vowels/tone marks from their base letters.
+  const THAI_UNSAFE = /\b(font-mono|uppercase|tracking-[^\s]+)\b/;
+
+  test('BBoxFrame tag and StatBar name (data text, may be Thai) use sans without tracking/uppercase', () => {
+    render(
+      <>
+        <BBoxFrame label="CLASS: วิศวกร AI" confidence={0.93}>x</BBoxFrame>
+        <StatBar name="ภาษาไทย" level={3} />
+      </>,
+    );
+    expect(screen.getByText('CLASS: วิศวกร AI · conf 0.93').className).not.toMatch(THAI_UNSAFE);
+    expect(screen.getByText('ภาษาไทย').className).not.toMatch(THAI_UNSAFE);
+  });
+});

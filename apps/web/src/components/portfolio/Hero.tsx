@@ -19,7 +19,7 @@ export function Hero({ team }: { team: Team }) {
         <h1
           id="hero-title"
           translate="no"
-          className="break-words px-1 text-[clamp(2.4rem,11vw,5.5rem)] font-semibold leading-none tracking-tight text-ink [text-shadow:0_0_24px_rgb(34_211_238/0.35)]"
+          className="break-words px-1 text-[clamp(2.4rem,11vw,5.5rem)] font-semibold leading-tight text-ink [text-shadow:0_0_24px_rgb(34_211_238/0.35)]"
         >
           {team.name}
         </h1>

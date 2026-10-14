@@ -22,7 +22,7 @@ export function BBoxFrame({ label, confidence, children, className = '' }: Props
       <span
         aria-hidden="true"
         translate="no"
-        className="max-w-full truncate bg-scan px-1.5 py-px font-mono text-[11px] font-semibold uppercase leading-4 tracking-wider text-void"
+        className="max-w-full truncate bg-scan px-1.5 py-px font-sans text-xs font-semibold leading-5 text-void"
       >
         {text}
       </span>

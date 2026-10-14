@@ -36,7 +36,7 @@ export function MemberCard({ member, onOpen, expanded = false, controlsId }: Pro
         />
       </BBoxFrame>
       <h3 className="mt-3 break-words text-xl font-semibold text-ink">{nick}</h3>
-      <p className="break-words font-mono text-sm text-quest">{member.role}</p>
+      <p className="break-words text-sm font-semibold text-quest">{member.role}</p>
       {member.bio ? <p className="mt-2 break-words text-sm text-pretty text-ink-muted">{member.bio}</p> : null}
       {topSkills.length > 0 ? (
         <div className="mt-4 space-y-1.5 border-t border-line pt-3">
@@ -52,7 +52,7 @@ export function MemberCard({ member, onOpen, expanded = false, controlsId }: Pro
         aria-expanded={expanded}
         aria-controls={controlsId}
         aria-label={`ดูรายละเอียด ${nick}`}
-        className="min-h-11 w-full border border-scan/50 px-3 font-mono text-sm text-scan transition-colors motion-reduce:transition-none hover:bg-scan/10 aria-expanded:bg-scan aria-expanded:text-void"
+        className="min-h-11 w-full border border-scan/50 px-3 font-sans text-sm font-semibold text-scan transition-colors motion-reduce:transition-none hover:bg-scan/10 aria-expanded:bg-scan aria-expanded:text-void"
       >
         ดูรายละเอียด
       </button>

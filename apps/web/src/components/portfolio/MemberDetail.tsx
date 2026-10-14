@@ -10,7 +10,7 @@ export function askHref(nickname: string): string {
 
 function SkillList({ member }: { member: Member }) {
   return (
-    <ul className="mt-2 space-y-1 font-mono text-sm">
+    <ul className="mt-2 space-y-1 text-sm">
       {member.skills.map((s) => (
         <li key={s.name} className="break-words"><span aria-hidden="true" className="text-scan">▸ </span>{s.name} ({s.level}/5)</li>
       ))}
@@ -22,7 +22,7 @@ export function MemberDetail({ member, id }: { member: Member; id: string }) {
   const nick = displayName(member);
   return (
     <div id={id} role="region" aria-label={`รายละเอียด ${nick}`} className="min-w-0 border border-scan/40 bg-panel/90 p-4 shadow-[0_0_32px_-16px_var(--color-scan)] sm:p-6">
-      <h4 className="font-mono text-sm font-semibold uppercase tracking-wider text-scan">ทักษะ</h4>
+      <h4 className="font-sans text-base font-semibold text-scan"><span aria-hidden="true" className="font-mono">▸ </span>ทักษะ</h4>
       {member.skills.length === 0 ? (
         <p className="mt-2 text-sm text-ink-muted">ยังไม่มีข้อมูลทักษะ</p>
       ) : member.skills.length < 3 ? (
@@ -32,7 +32,7 @@ export function MemberDetail({ member, id }: { member: Member; id: string }) {
           <SkillRadar skills={member.skills} />
         </Suspense>
       )}
-      <h4 className="mt-6 font-mono text-sm font-semibold uppercase tracking-wider text-scan">ผลงานส่วนตัว</h4>
+      <h4 className="mt-6 font-sans text-base font-semibold text-scan"><span aria-hidden="true" className="font-mono">▸ </span>ผลงานส่วนตัว</h4>
       {member.projects.length === 0 ? (
         <p className="mt-2 text-sm text-ink-muted">ยังไม่มีผลงาน</p>
       ) : (
@@ -41,7 +41,7 @@ export function MemberDetail({ member, id }: { member: Member; id: string }) {
             <li key={p.title} className="min-w-0 border-l-2 border-quest/60 bg-void/50 py-2 pl-3 pr-2">
               <p className="break-words font-semibold text-ink">{p.title}</p>
               <p className="break-words text-sm text-ink-muted">{p.summary}</p>
-              {p.tech.length > 0 ? <p className="break-words font-mono text-xs text-scan">{p.tech.join(' · ')}</p> : null}
+              {p.tech.length > 0 ? <p className="break-words text-sm text-scan">{p.tech.join(' · ')}</p> : null}
               {p.contribution ? <p className="break-words text-sm text-ink">{p.contribution}</p> : null}
               <ProjectLinks repoUrl={p.repoUrl} demoUrl={p.demoUrl} />
             </li>

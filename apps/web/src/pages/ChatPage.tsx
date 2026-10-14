@@ -67,7 +67,7 @@ export function ChatPage() {
     <div className="flex h-dvh min-w-0 flex-col md:flex-row">
       <button
         type="button"
-        className="flex min-h-11 items-center gap-2 border-b border-scan/20 bg-panel/90 px-3 text-left font-mono text-sm text-scan aria-expanded:bg-scan/10 md:hidden"
+        className="flex min-h-11 items-center gap-2 border-b border-scan/20 bg-panel/90 px-3 text-left font-sans text-sm font-semibold text-scan aria-expanded:bg-scan/10 md:hidden"
         aria-expanded={sidebarOpen}
         aria-controls={SIDEBAR_ID}
         onClick={() => setSidebarOpen((v) => !v)}

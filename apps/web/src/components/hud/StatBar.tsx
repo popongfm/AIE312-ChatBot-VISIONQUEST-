@@ -10,9 +10,9 @@ export function StatBar({ name, level }: { name: string; level: number }) {
       aria-valuemax={5}
       aria-valuenow={level}
       aria-valuetext={`${level}/5`}
-      className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 font-mono text-xs"
+      className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 text-xs"
     >
-      <span className="truncate text-ink-muted">{name}</span>
+      <span data-slot="name" className="truncate font-sans text-sm text-ink-muted">{name}</span>
       <span className="flex gap-0.5" aria-hidden="true">
         {SEGMENTS.map((n) => (
           <span
@@ -21,7 +21,7 @@ export function StatBar({ name, level }: { name: string; level: number }) {
           />
         ))}
       </span>
-      <span className="w-7 text-right tabular-nums text-ink" aria-hidden="true">
+      <span className="w-7 text-right font-mono tabular-nums text-ink" aria-hidden="true">
         {level}/5
       </span>
     </div>
