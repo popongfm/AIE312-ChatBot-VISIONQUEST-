@@ -473,7 +473,7 @@ test('500 → AiError, no fallback', async () => { /* calls.length === 1 */ });
   - `id` is converted with `Number()` (BIGSERIAL comes back as a string). `createdAt` is an ISO string.
   - `fakeModel(script: (string | Error)[]): ChatModel & { calls: { systemInstruction: string; history: HistoryTurn[] }[] }` yields strings in order and throws when it reaches an `Error`.
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 const A = randomUUID(), B = randomUUID();
@@ -497,10 +497,10 @@ test('clientId in query string is not accepted', async () => {
 });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/api -- conversations`. Expected: FAIL.
-- [ ] **Step 3: Implement** chatRepo, the middleware, and the routes.
-- [ ] **Step 4: Run** `npm test -w @vq/api`. Expected: PASS.
-- [ ] **Step 5: Commit** `git commit -am "feat(api): conversation CRUD scoped by X-Client-Id"`
+- [x] **Step 2: Run** `npm test -w @vq/api -- conversations`. Expected: FAIL.
+- [x] **Step 3: Implement** chatRepo, the middleware, and the routes.
+- [x] **Step 4: Run** `npm test -w @vq/api`. Expected: PASS.
+- [x] **Step 5: Commit** `git commit -am "feat(api): conversation CRUD scoped by X-Client-Id"`
 
 ---
 
