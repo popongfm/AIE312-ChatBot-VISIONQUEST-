@@ -618,7 +618,7 @@ test('getClientId is stable and survives storage errors', () => { /* same value 
   - `CitationChips({ slugs, members })` renders one `<a href="/#member-<slug>">📎 <displayName></a>` per slug, skipping unknown slugs.
   - `ChatPage` loads the portfolio (for chip names and suggested questions). Layout: Sidebar (list + `"เควสต์ใหม่"`), MessageList (`aria-live="polite"`), SuggestedQuestions when the conversation is empty, and a Composer (Enter sends, Shift+Enter adds a newline, disabled while `busy`) with the caption `"บทสนทนาถูกบันทึกเพื่อพัฒนาระบบ"`. While waiting for the first token it shows `"analyzing…"`. On mount with `?ask=`, it calls `newConversation()` then `send(ask)` and immediately runs `setSearchParams({}, { replace: true })`.
 
-- [ ] **Step 1: Write failing tests** (mock `api`)
+- [x] **Step 1: Write failing tests** (mock `api`)
 
 ```ts
 test('user and AI bubbles are visually separated', () => {
@@ -649,10 +649,10 @@ test('?ask is sent once and removed from URL', async () => {      // Review Focu
 });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/web`. Expected: FAIL.
-- [ ] **Step 3: Implement** the hook and components with plain Tailwind; the theme comes in Task 13.
-- [ ] **Step 4: Run** `npm test -w @vq/web`. Expected: PASS. Manual check: run API and web dev servers, ask "ทีมนี้ถนัดอะไร", and confirm the text streams, chips appear, refreshing `/chat` keeps the history, and the layout works at 360 px in devtools.
-- [ ] **Step 5: Commit** `git commit -am "feat(web): working chat page with streaming, citations, error states"`
+- [x] **Step 2: Run** `npm test -w @vq/web`. Expected: FAIL.
+- [x] **Step 3: Implement** the hook and components with plain Tailwind; the theme comes in Task 13.
+- [x] **Step 4: Run** `npm test -w @vq/web`. Expected: PASS. Manual check: run API and web dev servers, ask "ทีมนี้ถนัดอะไร", and confirm the text streams, chips appear, refreshing `/chat` keeps the history, and the layout works at 360 px in devtools.
+- [x] **Step 5: Commit** `git commit -am "feat(web): working chat page with streaming, citations, error states"`
 
 ---
 
