@@ -25,6 +25,9 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, next) => {
   const type = (err as { type?: string } | null)?.type;
   if (type === 'entity.parse.failed') return send(res, 400, 'BAD_JSON', 'Request body is not valid JSON');
   if (type === 'entity.too.large') return send(res, 413, 'PAYLOAD_TOO_LARGE', 'Request body is too large');
+  const e = err as { status?: unknown; statusCode?: unknown } | null;
+  const status = typeof e?.status === 'number' ? e.status : e?.statusCode;
+  if (typeof status === 'number' && status >= 400 && status < 500) return send(res, status, 'BAD_REQUEST', 'Bad request');
   console.error('unhandled error', err);
   return send(res, 500, 'INTERNAL', 'Internal server error');
 };

@@ -39,11 +39,8 @@ export function ChatPage() {
     if (!ask || askHandled.current) return;
     askHandled.current = true;
     setSearchParams({}, { replace: true });
-    void (async () => {
-      await newConversation();
-      await send(ask);
-    })();
-  }, [searchParams, setSearchParams, newConversation, send]);
+    void send(ask, { newConversation: true });
+  }, [searchParams, setSearchParams, send]);
 
   // Without ?ask=, show the most recent conversation once the list has loaded.
   useEffect(() => {
@@ -60,7 +57,7 @@ export function ChatPage() {
   };
   const handleNew = () => {
     setSidebarOpen(false);
-    void newConversation();
+    newConversation().catch(() => {});
   };
 
   return (

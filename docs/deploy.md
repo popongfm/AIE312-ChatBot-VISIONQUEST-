@@ -10,6 +10,7 @@ Pipeline: `ci → migrate → api → web → smoke` (ไฟล์ `.github/work
    - Build: `npm ci && npm run build -w @vq/api`
    - Start: `node apps/api/dist/server.js`
    - Env: `NODE_VERSION=22`, `DATABASE_URL`, `GEMINI_API_KEY`, `GEMINI_MODEL`, `GEMINI_FALLBACK_MODEL`, `WEB_ORIGIN`
+   - `WEB_ORIGIN` ต้องเป็น origin ของเว็บบน Vercel แบบตรงตัว: scheme + host, **ไม่มี `/` ท้าย และไม่มี path** (เช่น `https://visionquest.vercel.app`) เพราะ CORS เทียบสตริงแบบตรงตัว
    - ปิด **Auto-Deploy** แล้วคัดลอก **Deploy Hook**
 3. **Vercel** — import repo โดยตั้ง Root Directory = `apps/web` และ framework = Vite
    - Env `VITE_API_URL` = URL ของ Render
@@ -19,6 +20,7 @@ Pipeline: `ci → migrate → api → web → smoke` (ไฟล์ `.github/work
    และ protect `main` (ต้องมี PR และผ่าน check `ci`)
    - จำกัด environment `production` ให้ใช้ได้เฉพาะ branch `main` (Settings → Environments → production → Deployment branches → Selected branches → `main`) เพื่อไม่ให้ workflow ที่แก้บน feature branch อ่าน production secrets ได้
 5. รัน workflow `seed-production` หนึ่งครั้ง (Actions → seed-production → Run workflow)
+6. หลัง deploy ครั้งแรก ให้ตรวจครั้งเดียวว่า `req.ip` บน Render เป็น IP จริงของผู้ใช้ ถ้าเป็นที่อยู่ของ proxy ผู้ใช้ทุกคนจะใช้โควตา IP 60/นาทีร่วมกัน และอาจต้องปรับค่า `trust proxy`
 
 ## ก่อน deploy ทุกครั้ง (Before each deploy)
 

@@ -37,7 +37,13 @@ export function PortfolioPage() {
 
   useEffect(() => {
     if (!data || !/^#member-.+/.test(hash)) return;
-    const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+    let id: string;
+    try {
+      id = decodeURIComponent(hash.slice(1));
+    } catch {
+      return;
+    }
+    const el = document.getElementById(id);
     el?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
   }, [data, hash]);
 

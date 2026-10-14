@@ -89,18 +89,22 @@ export function useChat() {
     [activate],
   );
 
-  const newConversation = useCallback(async () => {
-    const created = await api.createConversation();
-    selectToken.current++;
-    setLoadingMessages(false);
-    setConversations((prev) => [created, ...prev.filter((c) => c.id !== created.id)]);
-    activate(created.id);
-    setMessages([]);
-    return created.id;
-  }, [activate]);
+  const createAndActivate = useCallback(
+    async (resetMessages: boolean) => {
+      const created = await api.createConversation();
+      selectToken.current++;
+      setLoadingMessages(false);
+      setConversations((prev) => [created, ...prev.filter((c) => c.id !== created.id)]);
+      activate(created.id);
+      if (resetMessages) setMessages([]);
+      return created.id;
+    },
+    [activate],
+  );
+  const newConversation = useCallback(() => createAndActivate(true), [createAndActivate]);
 
   const send = useCallback(
-    async (content: string) => {
+    async (content: string, opts?: { newConversation?: boolean }) => {
       const text = content.trim();
       if (!text || busyRef.current) return;
       busyRef.current = true;
@@ -113,8 +117,16 @@ export function useChat() {
         setMessages((prev) => [...prev, { key: nextKey(), role: 'error', content: message, citedMembers: [] }]);
 
       try {
-        const id = activeIdRef.current ?? (await newConversation());
-        setMessages((prev) => [...prev, { key: nextKey(), role: 'user', content: text, citedMembers: [] }]);
+        const userMsg: UiMessage = { key: nextKey(), role: 'user', content: text, citedMembers: [] };
+        // Show the question before any network call so a create failure cannot lose it.
+        if (opts?.newConversation) {
+          setMessages([userMsg]);
+          activate(null);
+        } else {
+          setMessages((prev) => [...prev, userMsg]);
+        }
+        const id =
+          (opts?.newConversation ? null : activeIdRef.current) ?? (await createAndActivate(false));
         setStreamingText('');
 
         let acc = '';
@@ -158,7 +170,7 @@ export function useChat() {
         setStreamingText(null);
       }
     },
-    [newConversation],
+    [activate, createAndActivate],
   );
 
   return { conversations, listLoaded, activeId, messages, streamingText, busy, loadingMessages, select, newConversation, send };

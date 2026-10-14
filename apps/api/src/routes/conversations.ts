@@ -57,6 +57,11 @@ export function conversationsRouter(
     "/conversations/:id/messages",
     ...createMessageLimiters(),
     async (req, res) => {
+      // Attach early so a client that disconnects during the DB awaits skips the model call.
+      const ac = new AbortController();
+      res.on("close", () => {
+        if (!res.writableEnded) ac.abort();
+      });
       const parsed = bodySchema.safeParse(req.body);
       if (!parsed.success)
         throw new HttpError(
@@ -92,11 +97,6 @@ export function conversationsRouter(
       res.flushHeaders();
 
       // From here on, nothing may reach the JSON errorHandler.
-      const ac = new AbortController();
-      res.on("close", () => {
-        if (!res.writableEnded) ac.abort();
-      });
-
       if (!portfolio) {
         sendEvent(res, {
           type: "error",
@@ -106,6 +106,8 @@ export function conversationsRouter(
         res.end();
         return;
       }
+
+      if (ac.signal.aborted) return; // client already gone; the user row stays
 
       let fullText = "";
       try {

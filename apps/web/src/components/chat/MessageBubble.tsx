@@ -7,6 +7,8 @@ import { CitationChips } from './CitationChips';
 import { OracleGlyph } from './OracleGlyph';
 
 const markdownComponents: Components = {
+  // Never load model-supplied remote images (tracking-pixel risk); keep the alt text.
+  img: ({ alt }) => <span>{alt}</span>,
   a: ({ href, children }) => (
     <a href={href} target="_blank" rel="noreferrer">
       {children}

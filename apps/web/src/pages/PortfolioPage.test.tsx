@@ -109,4 +109,9 @@ describe('PortfolioPage', () => {
     await waitFor(() => expect(scroll).toHaveBeenCalledTimes(1));
     expect(scroll.mock.instances[0]).toBe(document.getElementById('member-nok'));
   });
+
+  test('malformed hash does not crash the page', async () => {
+    render(<MemoryRouter initialEntries={['/#member-%E0']}><PortfolioPage /></MemoryRouter>);
+    expect(await screen.findByRole('heading', { level: 1, name: 'VISIONQUEST' })).toBeInTheDocument();
+  });
 });

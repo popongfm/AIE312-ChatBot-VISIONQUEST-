@@ -18,6 +18,19 @@ const model = createGeminiModel({
 const portfolio = createPortfolioCache(() => getPortfolio(pool));
 const app = createApp({ pool, model, config, portfolio });
 
-app.listen(config.port, () => {
+const server = app.listen(config.port, () => {
   console.log(`VISIONQUEST API ${config.version} listening on :${config.port}`);
 });
+
+function shutdown(signal: string) {
+  console.log(`${signal} received, shutting down`);
+  setTimeout(() => process.exit(1), 10_000).unref();
+  server.close(() => {
+    pool
+      .end()
+      .catch((err: unknown) => console.error('pool close failed', err))
+      .finally(() => process.exit(0));
+  });
+}
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));

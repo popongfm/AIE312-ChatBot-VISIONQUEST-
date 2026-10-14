@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { afterAll, beforeEach, describe, expect, test } from 'vitest';
+import { afterAll, beforeEach, describe, expect, test, vi } from 'vitest';
 import request from 'supertest';
 import { createApp } from '../app';
 import { insertMessage } from '../services/chatRepo';
@@ -58,5 +58,16 @@ describe('conversations API', () => {
       { id: 1, role: 'user', content: 'hi', citedMembers: [], createdAt: expect.any(String) },
       { id: 2, role: 'model', content: 'yo', citedMembers: ['mickie'], createdAt: expect.any(String) },
     ]);
+  });
+
+  test('malformed URI in path param → 400 BAD_REQUEST, not logged as unhandled', async () => {
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    try {
+      const res = await request(app).get('/api/conversations/%E0/messages').set('X-Client-Id', A).expect(400);
+      expect(res.body).toEqual({ error: { code: 'BAD_REQUEST', message: 'Bad request' } });
+      expect(spy).not.toHaveBeenCalled();
+    } finally {
+      spy.mockRestore();
+    }
   });
 });

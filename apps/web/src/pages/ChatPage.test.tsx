@@ -207,4 +207,13 @@ describe('ChatPage', () => {
     expect(screen.getByText('คำถามใหม่')).toBeInTheDocument();
     expect(screen.getByText('คำตอบใหม่')).toBeInTheDocument();
   });
+
+  test('?ask with createConversation failing keeps the question and shows connection-lost', async () => {
+    m.createConversation.mockRejectedValue(new Error('down'));
+    renderChat('/chat?ask=ทีมนี้ถนัดอะไร');
+    expect(await screen.findByText('ทีมนี้ถนัดอะไร')).toBeInTheDocument();
+    expect(await screen.findByText('การเชื่อมต่อขาดหาย ลองส่งใหม่อีกครั้ง')).toBeInTheDocument();
+    expect(screen.getByTestId('location').textContent).toBe('/chat');
+    expect(m.sendMessage).not.toHaveBeenCalled();
+  });
 });

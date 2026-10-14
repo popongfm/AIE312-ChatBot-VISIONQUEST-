@@ -93,4 +93,12 @@ describe('MessageBubble', () => {
     rerender(<MessageBubble message={msg} members={[]} onResend={onResend} resendDisabled />);
     expect(screen.getByRole('button', { name: 'ส่งใหม่' })).toBeDisabled();
   });
+
+  test('markdown images are not rendered; alt text remains', () => {
+    const { container } = render(
+      <MessageBubble message={{ key: '9', role: 'model', content: '![alt](https://x.test/p.png)', citedMembers: [] }} members={[]} />,
+    );
+    expect(container.querySelector('img')).toBeNull();
+    expect(screen.getByText('alt')).toBeInTheDocument();
+  });
 });
