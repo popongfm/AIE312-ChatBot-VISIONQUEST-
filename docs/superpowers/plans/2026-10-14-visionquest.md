@@ -805,7 +805,7 @@ test('questions.json has 4 team, 6 member (2 per member), 2 refusal', () => { /*
 **Interfaces:**
 - Consumes: everything above.
 
-- [ ] **Step 1: Run the failing check.** Run `grep -rn "TODO:" seed/`. Expected: matches, because the templates are still unfilled.
+- [x] **Step 1: Run the failing check.** Run `grep -rn "TODO:" seed/`. Expected: matches, because the templates are still unfilled.
 - [ ] **Step 2: Fill in real data** from all 3 members. Remove every `TODO:` and add the avatars.
 - [ ] **Step 3: Run checks.** Run `grep -rn "TODO:" seed/` (expected: no output), then `npm test` (expected: PASS, including "real seed/ folder is valid"), then `npm run eval -w @vq/api` (expected: ≥ 10/12).
 - [ ] **Step 4: Run** the `seed-production` workflow, then `scripts/smoke.sh $API_URL $WEB_URL`. Expected: exit 0. Rehearse the demo: Portfolio page → ask about a member → 📎 chip back to the card → an out-of-scope question gets a refusal → show the green pipeline and the red-PR screenshot.
