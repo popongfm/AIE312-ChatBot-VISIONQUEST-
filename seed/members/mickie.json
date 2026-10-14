@@ -1,0 +1,22 @@
+{
+  "slug": "mickie",
+  "name": "ตัวอย่าง: ชื่อ นามสกุล",
+  "nickname": "Mickie",
+  "role": "AI Engineer",
+  "bio": "ตัวอย่าง: แนะนำตัวสั้น ๆ",
+  "avatar_url": "/avatars/mickie.jpg",
+  "sort_order": 1,
+  "skills": [
+    { "name": "Python", "category": "ai", "level": 5 },
+    { "name": "SQL", "category": "data", "level": 3 }
+  ],
+  "projects": [{
+    "title": "ตัวอย่าง: MyMedicine",
+    "summary": "ตัวอย่าง: สรุปโปรเจกต์",
+    "tech": ["YOLO-seg", "Python"],
+    "repo_url": null,
+    "demo_url": null,
+    "image_url": null,
+    "contribution": "ตัวอย่าง: หน้าที่ในโปรเจกต์"
+  }]
+}

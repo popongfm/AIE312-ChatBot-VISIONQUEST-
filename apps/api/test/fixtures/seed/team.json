@@ -1,0 +1,20 @@
+{
+  "name": "Fixture Team",
+  "tagline": "Fixture tagline",
+  "concept": null,
+  "highlights": ["h1", "h2"],
+  "contacts": [
+    { "type": "email", "label": "Mail", "url": "mailto:team@example.com" },
+    { "type": "github", "label": "GitHub", "url": "https://github.com/example" }
+  ],
+  "team_projects": [{
+    "title": "Fixture Team Project",
+    "summary": "A shared project",
+    "tech": ["React", "Express"],
+    "repo_url": null, "demo_url": null, "image_url": null,
+    "members": [
+      { "slug": "mickie", "contribution": "Built the AI part" },
+      { "slug": "art", "contribution": "Built the UI" }
+    ]
+  }]
+}

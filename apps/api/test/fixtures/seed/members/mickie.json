@@ -1,0 +1,20 @@
+{
+  "slug": "mickie",
+  "name": "Fixture Mickie",
+  "nickname": "Mickie",
+  "role": "AI Engineer",
+  "bio": "Fixture bio",
+  "avatar_url": "/avatars/mickie.jpg",
+  "sort_order": 1,
+  "skills": [
+    { "name": "Python", "category": "ai", "level": 5 },
+    { "name": "SQL", "category": "data", "level": 3 }
+  ],
+  "projects": [{
+    "title": "Mickie Personal Project",
+    "summary": "Personal summary",
+    "tech": ["Python"],
+    "repo_url": null, "demo_url": null, "image_url": null,
+    "contribution": "Everything"
+  }]
+}

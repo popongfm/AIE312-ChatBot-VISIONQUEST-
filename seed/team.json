@@ -1,0 +1,22 @@
+{
+  "name": "VISIONQUEST",
+  "tagline": "TODO: คำโปรยของทีม",
+  "concept": "TODO: แนวคิดของทีม",
+  "highlights": ["TODO: จุดเด่นของทีม"],
+  "contacts": [
+    { "type": "email", "label": "TODO: อีเมลทีม", "url": "mailto:todo@example.com" }
+  ],
+  "team_projects": [{
+    "title": "VISIONQUEST Portfolio Chatbot",
+    "summary": "TODO: สรุปโปรเจกต์ของทีม",
+    "tech": ["React", "Express", "PostgreSQL", "Gemini"],
+    "repo_url": null,
+    "demo_url": null,
+    "image_url": null,
+    "members": [
+      { "slug": "mickie", "contribution": "ตัวอย่าง: พัฒนาส่วน AI และ API" },
+      { "slug": "member-2", "contribution": "TODO: หน้าที่ของสมาชิก 2" },
+      { "slug": "member-3", "contribution": "TODO: หน้าที่ของสมาชิก 3" }
+    ]
+  }]
+}

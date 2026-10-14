@@ -1,0 +1,11 @@
+{
+  "slug": "member-3",
+  "name": "TODO: ชื่อ นามสกุล",
+  "nickname": "TODO: ชื่อเล่น",
+  "role": "TODO: ตำแหน่ง",
+  "bio": "TODO: แนะนำตัวสั้น ๆ",
+  "avatar_url": "TODO: /avatars/member-3.jpg",
+  "sort_order": 3,
+  "skills": [],
+  "projects": []
+}

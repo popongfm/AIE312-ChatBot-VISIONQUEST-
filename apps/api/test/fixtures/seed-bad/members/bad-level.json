@@ -1,0 +1,11 @@
+{
+  "slug": "bad",
+  "name": "Bad",
+  "nickname": null,
+  "role": "x",
+  "bio": null,
+  "avatar_url": null,
+  "sort_order": 1,
+  "skills": [{ "name": "Python", "category": "ai", "level": 6 }],
+  "projects": []
+}

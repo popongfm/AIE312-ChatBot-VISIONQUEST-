@@ -1,0 +1,20 @@
+{
+  "slug": "art",
+  "name": "Fixture Art",
+  "nickname": "Art",
+  "role": "Frontend Engineer",
+  "bio": null,
+  "avatar_url": null,
+  "sort_order": 2,
+  "skills": [
+    { "name": "React", "category": "frontend", "level": 4 },
+    { "name": "Python", "category": "ai", "level": 2 }
+  ],
+  "projects": [{
+    "title": "Art Personal Project",
+    "summary": "Personal summary",
+    "tech": ["React"],
+    "repo_url": null, "demo_url": null, "image_url": null,
+    "contribution": null
+  }]
+}
