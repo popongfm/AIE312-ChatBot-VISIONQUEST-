@@ -4,6 +4,13 @@ on:
   pull_request:
   push:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && 'deploy-production' || format('ci-{0}', github.run_id) }}
+  cancel-in-progress: false
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -42,9 +49,6 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: production
-    concurrency:
-      group: deploy-production
-      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -61,9 +65,6 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: production
-    concurrency:
-      group: deploy-production
-      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
       - name: Trigger Render deploy
@@ -80,9 +81,6 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: production
-    concurrency:
-      group: deploy-production
-      cancel-in-progress: false
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -103,9 +101,6 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: production
-    concurrency:
-      group: deploy-production
-      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
       - run: scripts/smoke.sh "$API_URL" "$WEB_URL"

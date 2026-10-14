@@ -17,6 +17,7 @@ Pipeline: `ci → migrate → api → web → smoke` (ไฟล์ `.github/work
    - สร้าง token และรัน `vercel link` เพื่อดู org ID และ project ID
 4. **GitHub** — เพิ่ม 7 secrets (ในสภาพแวดล้อม `production`): `DATABASE_URL`, `RENDER_DEPLOY_HOOK`, `API_URL`, `WEB_URL`, `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
    และ protect `main` (ต้องมี PR และผ่าน check `ci`)
+   - จำกัด environment `production` ให้ใช้ได้เฉพาะ branch `main` (Settings → Environments → production → Deployment branches → Selected branches → `main`) เพื่อไม่ให้ workflow ที่แก้บน feature branch อ่าน production secrets ได้
 5. รัน workflow `seed-production` หนึ่งครั้ง (Actions → seed-production → Run workflow)
 
 ## ก่อน deploy ทุกครั้ง (Before each deploy)
