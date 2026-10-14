@@ -36,3 +36,79 @@ jobs:
           DATABASE_URL: ${{ env.TEST_DATABASE_URL }}
       - run: npm test
       - run: npm run build
+
+  migrate:
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run migrate -w @vq/api
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+  api:
+    needs: migrate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trigger Render deploy
+        run: curl -fsS -X POST "$RENDER_DEPLOY_HOOK"
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+      - name: Wait for new version
+        run: scripts/wait-for-version.sh "$API_URL" "$GITHUB_SHA" 600
+        env:
+          API_URL: ${{ secrets.API_URL }}
+
+  web:
+    needs: api
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx vercel@64 pull --yes --environment=production --token="$VERCEL_TOKEN"
+      - run: npx vercel@64 build --prod --token="$VERCEL_TOKEN"
+      - run: npx vercel@64 deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+
+  smoke:
+    needs: web
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/smoke.sh "$API_URL" "$WEB_URL"
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          WEB_URL: ${{ secrets.WEB_URL }}
