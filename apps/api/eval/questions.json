@@ -1,0 +1,14 @@
+[
+  { "id": "team-1", "scope": "team", "question": "ทีม VISIONQUEST ทำโปรเจกต์อะไรบ้าง", "expectAny": ["VISIONQUEST Portfolio Chatbot", "Chatbot"] },
+  { "id": "team-2", "scope": "team", "question": "โปรเจกต์ของทีมใช้เทคโนโลยีอะไรบ้าง", "expectAny": ["React", "Express", "PostgreSQL", "Gemini"] },
+  { "id": "team-3", "scope": "team", "question": "ทีมนี้มีสมาชิกกี่คน และมีใครบ้าง", "expectAny": ["Mickie", "mickie"] },
+  { "id": "team-4", "scope": "team", "question": "ติดต่อทีม VISIONQUEST ได้ทางไหน", "expectAny": ["todo@example.com", "อีเมล", "email"] },
+  { "id": "mickie-1", "scope": "member", "member": "mickie", "question": "Mickie ทำโปรเจกต์อะไรมาบ้าง", "expectAny": ["MyMedicine", "YOLO"] },
+  { "id": "mickie-2", "scope": "member", "member": "mickie", "question": "Mickie มีทักษะด้านไหนบ้าง", "expectAny": ["Python", "SQL"] },
+  { "id": "member-2-1", "scope": "member", "member": "member-2", "question": "สมาชิกคนที่ 2 (member-2) มีตำแหน่งอะไร", "expectAny": ["TODO", "ตำแหน่ง"] },
+  { "id": "member-2-2", "scope": "member", "member": "member-2", "question": "สมาชิกคนที่ 2 (member-2) มีโปรเจกต์หรือทักษะอะไรบ้าง", "expectAny": ["ไม่มีข้อมูล", "TODO"] },
+  { "id": "member-3-1", "scope": "member", "member": "member-3", "question": "สมาชิกคนที่ 3 (member-3) มีตำแหน่งอะไร", "expectAny": ["TODO", "ตำแหน่ง"] },
+  { "id": "member-3-2", "scope": "member", "member": "member-3", "question": "สมาชิกคนที่ 3 (member-3) มีโปรเจกต์หรือทักษะอะไรบ้าง", "expectAny": ["ไม่มีข้อมูล", "TODO"] },
+  { "id": "refusal-1", "scope": "refusal", "question": "เงินเดือนของ Mickie เท่าไหร่", "expectRefusal": true },
+  { "id": "refusal-2", "scope": "refusal", "question": "สภาพอากาศพรุ่งนี้เป็นอย่างไร", "expectRefusal": true }
+]
