@@ -143,7 +143,7 @@ export function displayName(m: { name: string; nickname: string | null }): strin
 
 - Root scripts: `typecheck` (`tsc -b` or `npm run typecheck --workspaces --if-present`), `lint` (`eslint .`), `test` (`npm run test --workspaces --if-present`), `build` (`npm run build --workspaces --if-present`).
 
-- [ ] **Step 1: Write the failing test** in `packages/shared/src/index.test.ts`
+- [x] **Step 1: Write the failing test** in `packages/shared/src/index.test.ts`
 
 ```ts
 test('displayName prefers nickname', () => {
@@ -156,11 +156,11 @@ test('chat error copy is fixed Thai text', () => {
 });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/shared`. Expected: FAIL, `displayName` is not exported.
-- [ ] **Step 3: Implement** the types and two exports above in `packages/shared/src/index.ts`. ESLint flat config uses `typescript-eslint` recommended, plus `eslint-plugin-react-hooks` for `apps/web/**`. Ignore `dist`.
-- [ ] **Step 4: Run** `npm test -w @vq/shared && npm run typecheck && npm run lint && npm run build`. Expected: all pass.
-- [ ] **Step 5: Write `pipeline.yml`.** Triggers are `pull_request` and `push`. Job `ci` runs on `ubuntu-latest` with service `postgres:16` (`POSTGRES_PASSWORD: postgres`, `POSTGRES_DB: visionquest_test`, port 5432, health-cmd `pg_isready`). Job env is `TEST_DATABASE_URL=postgres://postgres:postgres@localhost:5432/visionquest_test`. Steps: checkout → setup-node 22 with `cache: npm` → `npm ci` → `npm run typecheck` → `npm run lint` → `npm test` → `npm run build`.
-- [ ] **Step 6: Commit and verify CI.** Run `git init`, add a GitHub remote, then commit: `git add -A && git commit -m "chore: monorepo scaffold, shared types, CI"`. Push to a branch and confirm the `ci` job is green on GitHub.
+- [x] **Step 2: Run** `npm test -w @vq/shared`. Expected: FAIL, `displayName` is not exported.
+- [x] **Step 3: Implement** the types and two exports above in `packages/shared/src/index.ts`. ESLint flat config uses `typescript-eslint` recommended, plus `eslint-plugin-react-hooks` for `apps/web/**`. Ignore `dist`.
+- [x] **Step 4: Run** `npm test -w @vq/shared && npm run typecheck && npm run lint && npm run build`. Expected: all pass.
+- [x] **Step 5: Write `pipeline.yml`.** Triggers are `pull_request` and `push`. Job `ci` runs on `ubuntu-latest` with service `postgres:16` (`POSTGRES_PASSWORD: postgres`, `POSTGRES_DB: visionquest_test`, port 5432, health-cmd `pg_isready`). Job env is `TEST_DATABASE_URL=postgres://postgres:postgres@localhost:5432/visionquest_test`. Steps: checkout → setup-node 22 with `cache: npm` → `npm ci` → `npm run typecheck` → `npm run lint` → `npm test` → `npm run build`.
+- [x] **Step 6: Commit and verify CI.** Run `git init`, add a GitHub remote, then commit: `git add -A && git commit -m "chore: monorepo scaffold, shared types, CI"`. Push to a branch and confirm the `ci` job is green on GitHub.
 
 ---
 
