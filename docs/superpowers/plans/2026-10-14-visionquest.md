@@ -755,11 +755,11 @@ test('StatBar exposes meter semantics', () => { render(<StatBar name="Python" le
   4. GitHub: add the 7 secrets and protect `main` (require the `ci` check and a PR).
   5. Run the `seed-production` workflow once.
 
-- [ ] **Step 1: Write the failing check.** Run `scripts/smoke.sh http://localhost:3000 http://localhost:4173` with nothing running. Expected: non-zero exit (the script does not exist yet, then later a connection failure).
-- [ ] **Step 2: Implement** the scripts (bash with `set -euo pipefail`, `curl -fsS`, `jq`), the workflow jobs, `seed-production.yml` (`workflow_dispatch` only: checkout → node 22 → `npm ci` → `npm run migrate -w @vq/api` → `npm run seed -w @vq/api` with `DATABASE_URL` from secrets), and `docs/deploy.md`. Add `"git": { "deploymentEnabled": false }` to `apps/web/vercel.json`.
-- [ ] **Step 3: Verify locally.** Start the API (`npm run build -w @vq/api && node apps/api/dist/server.js` against the seeded local DB with `RENDER_GIT_COMMIT=test123`) and the web preview (`npm run build -w @vq/web && npx vite preview --port 4173 -w @vq/web`). Then run `scripts/wait-for-version.sh http://localhost:3000 test123 30` (exit 0) and `scripts/smoke.sh http://localhost:3000 http://localhost:4173` (exit 0). Note that `vite preview` serves `/chat` through its SPA fallback, while production uses `vercel.json`.
+- [x] **Step 1: Write the failing check.** Run `scripts/smoke.sh http://localhost:3000 http://localhost:4173` with nothing running. Expected: non-zero exit (the script does not exist yet, then later a connection failure).
+- [x] **Step 2: Implement** the scripts (bash with `set -euo pipefail`, `curl -fsS`, `jq`), the workflow jobs, `seed-production.yml` (`workflow_dispatch` only: checkout → node 22 → `npm ci` → `npm run migrate -w @vq/api` → `npm run seed -w @vq/api` with `DATABASE_URL` from secrets), and `docs/deploy.md`. Add `"git": { "deploymentEnabled": false }` to `apps/web/vercel.json`.
+- [x] **Step 3: Verify locally.** Start the API (`npm run build -w @vq/api && node apps/api/dist/server.js` against the seeded local DB with `RENDER_GIT_COMMIT=test123`) and the web preview (`npm run build -w @vq/web && npx vite preview --port 4173 -w @vq/web`). Then run `scripts/wait-for-version.sh http://localhost:3000 test123 30` (exit 0) and `scripts/smoke.sh http://localhost:3000 http://localhost:4173` (exit 0). Note that `vite preview` serves `/chat` through its SPA fallback, while production uses `vercel.json`.
 - [ ] **Step 4: Verify on GitHub.** Complete `docs/deploy.md` steps 1–5 and merge a PR to `main`. Expected: `ci → migrate → api → web → smoke` all green, and the Vercel URL works including refresh on `/chat`. Then open a PR with a deliberately failing test. Expected: `ci` is red and no deploy job runs. This is the screenshot for the slides.
-- [ ] **Step 5: Commit** `git commit -am "ci: gated deploy to Neon/Render/Vercel with version wait and smoke test"`
+- [x] **Step 5: Commit** `git commit -am "ci: gated deploy to Neon/Render/Vercel with version wait and smoke test"`
 
 ---
 
