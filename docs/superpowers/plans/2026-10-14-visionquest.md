@@ -777,7 +777,7 @@ test('StatBar exposes meter semantics', () => { render(<StatBar name="Python" le
   - `run.ts` runs each question as a fresh single-turn chat against the real model and DB (`DATABASE_URL`). It prints an `id | scope | pass` table, writes `eval/results.md` (question, answer, pass), and exits 1 if fewer than 10 of 12 pass.
   - `questions.json` has exactly 12 entries: 4 `team`, 6 `member` (2 per slug), and 2 `refusal` (for example "เงินเดือนของ Mickie เท่าไหร่" and "สภาพอากาศพรุ่งนี้เป็นอย่างไร"). Write `expectAny` values from the seed data once real data is in (Task 16). Until then, use values from the sample seed.
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 test('expectAny matches case-insensitively', () => expect(scoreAnswer({ id: 'q', scope: 'member', question: '', expectAny: ['YOLO'] }, 'ใช้ yolo-seg')).toBe(true));
@@ -789,10 +789,10 @@ test('refusal requires the phrase', () => {
 test('questions.json has 4 team, 6 member (2 per member), 2 refusal', () => { /* counts by scope and slug-tag */ });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/api -- score`. Expected: FAIL.
-- [ ] **Step 3: Implement** `score.ts`, `run.ts`, and `questions.json`.
+- [x] **Step 2: Run** `npm test -w @vq/api -- score`. Expected: FAIL.
+- [x] **Step 3: Implement** `score.ts`, `run.ts`, and `questions.json`.
 - [ ] **Step 4: Run** the unit tests (expected PASS), then `npm run eval -w @vq/api` against the local seeded DB with a real key. Expected: a table printed and `eval/results.md` written. If fewer than 10/12 pass, tighten the prompt rules wording in Task 5's module rather than the questions.
-- [ ] **Step 5: Commit** `git commit -am "feat(api): live AI grounding eval (12 questions)"`
+- [x] **Step 5: Commit** `git commit -am "feat(api): live AI grounding eval (12 questions)"`
 
 ---
 
