@@ -29,8 +29,6 @@ export const MARKDOWN_STYLES = [
   '[&_blockquote]:border-l-2 [&_blockquote]:border-scan/50 [&_blockquote]:pl-3 [&_blockquote]:text-ink-muted',
 ].join(' ');
 
-const TAG = 'mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em]';
-
 type Props = {
   message: UiMessage;
   members: Member[];
@@ -47,8 +45,7 @@ export function MessageBubble({ message, members, onResend, resendDisabled }: Pr
       <div data-role={role} className={`flex min-w-0 max-w-full gap-2 ${align}`}>
         <OracleGlyph />
         <HudPanel tone="cyan" className="max-w-[85%] px-3.5 py-3">
-          <p aria-hidden="true" className={`${TAG} text-scan`}>ORACLE</p>
-          <div data-slot="content" className={`${CONTENT_WRAP} space-y-2 leading-relaxed text-ink ${MARKDOWN_STYLES}`}>
+          <div data-slot="content" className={`${CONTENT_WRAP} space-y-2 text-ink ${MARKDOWN_STYLES}`}>
             <ReactMarkdown components={markdownComponents}>{content}</ReactMarkdown>
           </div>
           <CitationChips slugs={citedMembers} members={members} />
@@ -60,8 +57,7 @@ export function MessageBubble({ message, members, onResend, resendDisabled }: Pr
   if (role === 'error') {
     return (
       <div data-role={role} className={`flex min-w-0 max-w-full ${align}`}>
-        <div className="min-w-0 max-w-[85%] border border-danger/60 border-l-4 border-l-danger bg-danger/10 px-3.5 py-3">
-          <p aria-hidden="true" className={`${TAG} text-danger`}>SYSTEM ⚠ ERROR</p>
+        <div className="min-w-0 max-w-[85%] border-l-2 border-danger bg-danger/10 px-3.5 py-3">
           <div data-slot="content" className={`${CONTENT_WRAP} whitespace-pre-wrap text-ink`}>
             {content}
           </div>
@@ -70,7 +66,7 @@ export function MessageBubble({ message, members, onResend, resendDisabled }: Pr
               type="button"
               onClick={onResend}
               disabled={resendDisabled}
-              className="mt-3 min-h-10 border border-danger px-4 text-sm font-semibold text-danger transition-colors motion-reduce:transition-none hover:bg-danger hover:text-void disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-danger"
+              className="mt-3 min-h-10 border border-danger px-4 text-sm font-semibold text-danger transition-[background-color,color] motion-reduce:transition-none hover:bg-danger hover:text-void disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-danger"
             >
               ส่งใหม่
             </button>
@@ -82,8 +78,7 @@ export function MessageBubble({ message, members, onResend, resendDisabled }: Pr
 
   return (
     <div data-role={role} className={`flex min-w-0 max-w-full ${align}`}>
-      <div className="min-w-0 max-w-[85%] border border-quest/50 border-r-4 border-r-quest bg-quest/10 px-3.5 py-3">
-        <p aria-hidden="true" className={`${TAG} text-right text-quest`}>PLAYER</p>
+      <div className="min-w-0 max-w-[85%] border-r-2 border-quest bg-quest/10 px-3.5 py-2.5">
         <div data-slot="content" className={`${CONTENT_WRAP} whitespace-pre-wrap text-ink`}>
           {content}
         </div>

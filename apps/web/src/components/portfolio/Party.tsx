@@ -7,9 +7,9 @@ import { SectionHeading } from './SectionHeading';
 export function Party({ members }: { members: Member[] }) {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   return (
-    <section id="party" aria-labelledby="party-title" className="px-4 py-12">
-      <SectionHeading id="party-title" index="02" code="PARTY ROSTER">สมาชิก</SectionHeading>
-      <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <section id="party" aria-labelledby="party-title" className="px-4 py-16 sm:px-8 sm:py-20">
+      <SectionHeading id="party-title">สมาชิก</SectionHeading>
+      <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
         {members.map((m) => {
           const open = openSlug === m.slug;
           const detailId = `member-detail-${m.slug}`;

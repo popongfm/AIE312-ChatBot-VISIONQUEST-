@@ -3,7 +3,7 @@
 /* Quest × Vision HUD — design tokens */
 @theme {
   --color-void: #070b14;
-  --color-panel: #0c1322;
+  --color-panel: #0d1524;
   --color-line: #1f2b45;
   --color-ink: #e6edf7;
   --color-ink-muted: #9aa8bf;
@@ -16,15 +16,10 @@
 
   /* Only ever used behind `motion-safe:` (and ScanLine also unmounts under reduced motion). */
   --animate-scan: vq-scan 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  --animate-detect: vq-detect 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 
   @keyframes vq-scan {
     from { transform: translateY(-100%); }
     to { transform: translateY(100%); }
-  }
-  @keyframes vq-detect {
-    from { opacity: 0; transform: scale(1.6); }
-    to { opacity: 1; transform: scale(1); }
   }
 }
 
@@ -40,24 +35,9 @@
     background-color: var(--color-void);
     color: var(--color-ink);
     font-family: var(--font-sans);
+    line-height: 1.7; /* Thai stacks vowels/tone marks above and below */
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: rgb(34 211 238 / 0.2);
-    /* atmosphere: top glow + faint sensor grid (static) */
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% -10%, rgb(34 211 238 / 0.12), transparent 70%),
-      linear-gradient(rgb(34 211 238 / 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(34 211 238 / 0.04) 1px, transparent 1px);
-    background-size: 100% 100%, 32px 32px, 32px 32px;
-    background-attachment: fixed;
-  }
-  /* CRT scanline texture (static, decorative, never intercepts input) */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    pointer-events: none;
-    background: repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.018) 0 1px, transparent 1px 3px);
   }
   a, button, textarea, input, select, summary {
     touch-action: manipulation;
@@ -85,4 +65,53 @@
     rgb(103 232 249 / 0.9) 99.4%,
     transparent 100%
   );
+}
+
+/* Hero "camera feed": the only textured surface on the site (static). */
+.vq-feed {
+  background-image:
+    radial-gradient(ellipse 120% 90% at 30% 40%, transparent 45%, rgb(3 6 12 / 0.75) 100%),
+    radial-gradient(ellipse 70% 60% at 25% 0%, rgb(34 211 238 / 0.10), transparent 70%),
+    linear-gradient(rgb(34 211 238 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(34 211 238 / 0.045) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/*
+ * Hero "detection lock" — the one self-playing moment (~1.5 s, transform/opacity only, then still):
+ *   0–800 ms     one ScanLine sweep crosses the hero
+ *   350–1050 ms  the four bbox corners travel in from the hero edges and snap onto the name
+ *   1050–1450 ms the class/conf label settles in
+ * Without this block (prefers-reduced-motion: reduce) the locked end state renders with no movement.
+ */
+.vq-lock [data-corner] {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .vq-lock .vq-scanline {
+    animation-duration: 800ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  }
+  .vq-lock [data-corner] {
+    animation: vq-lock 700ms cubic-bezier(0.2, 0.8, 0.2, 1) 350ms both;
+  }
+  .vq-lock [data-corner="tl"] { --vq-dx: -14vw; --vq-dy: -3.5rem; }
+  .vq-lock [data-corner="tr"] { --vq-dx: 14vw; --vq-dy: -3.5rem; }
+  .vq-lock [data-corner="bl"] { --vq-dx: -14vw; --vq-dy: 3.5rem; }
+  .vq-lock [data-corner="br"] { --vq-dx: 14vw; --vq-dy: 3.5rem; }
+  .vq-lock [data-slot="label"] {
+    animation: vq-settle 400ms ease-out 1050ms both;
+  }
+}
+
+@keyframes vq-lock {
+  0% { opacity: 0; transform: translate(var(--vq-dx, 0), var(--vq-dy, 0)) scale(1.5); }
+  30% { opacity: 1; }
+  80% { opacity: 1; transform: translate(0, 0) scale(0.9); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes vq-settle {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
 }

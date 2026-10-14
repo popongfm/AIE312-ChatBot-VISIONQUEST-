@@ -133,3 +133,13 @@ describe('Thai-safe typography guard', () => {
     expect(screen.getByText('ภาษาไทย').className).not.toMatch(THAI_UNSAFE);
   });
 });
+
+describe('BBoxFrame detection-lock hooks', () => {
+  test('corners are static by default and tagged for the hero lock choreography', () => {
+    const { container } = render(<BBoxFrame label="L" confidence={0.99}>x</BBoxFrame>);
+    const corners = [...container.querySelectorAll('[data-slot="corner"]')];
+    expect(corners.map((c) => c.getAttribute('data-corner'))).toEqual(['tl', 'tr', 'bl', 'br']);
+    corners.forEach((c) => expect(c.className).not.toMatch(/animate-/));
+    expect(screen.getByText('L · conf 0.99')).toHaveAttribute('data-slot', 'label');
+  });
+});

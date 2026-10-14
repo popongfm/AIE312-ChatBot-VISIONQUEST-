@@ -12,7 +12,7 @@ export default function SkillRadar({ skills }: { skills: MemberSkill[] }) {
       <ResponsiveContainer width="100%" height={260}>
         <RadarChart data={data} outerRadius="70%">
           <PolarGrid stroke={SCAN} strokeOpacity={0.25} />
-          <PolarAngleAxis dataKey="name" tick={{ fill: INK, fontSize: 12, fontFamily: 'IBM Plex Mono, monospace' }} />
+          <PolarAngleAxis dataKey="name" tick={{ fill: INK, fontSize: 12, fontFamily: 'IBM Plex Sans Thai, IBM Plex Sans, sans-serif' }} />
           <PolarRadiusAxis domain={[0, 5]} tickCount={6} tick={false} axisLine={false} />
           <Radar
             dataKey="level"

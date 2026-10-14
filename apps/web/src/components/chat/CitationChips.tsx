@@ -13,7 +13,7 @@ export function CitationChips({ slugs, members }: { slugs: string[]; members: Me
         <li key={m.slug} className="min-w-0 max-w-full">
           <a
             href={`/#member-${m.slug}`}
-            className="inline-flex min-h-10 max-w-full items-center break-words border border-scan/40 bg-scan/5 px-2.5 font-sans text-sm text-scan transition-colors motion-reduce:transition-none hover:border-scan hover:bg-scan/15 sm:min-h-8"
+            className="inline-flex min-h-10 max-w-full items-center break-words border border-scan/40 bg-scan/5 px-2.5 font-sans text-sm text-scan transition-[background-color,border-color] motion-reduce:transition-none hover:border-scan hover:bg-scan/15 sm:min-h-8"
           >
             📎 {displayName(m)}
           </a>

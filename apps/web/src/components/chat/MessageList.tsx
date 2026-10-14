@@ -27,8 +27,9 @@ export function MessageList({ messages, members, streamingText, busy, onResend }
       ref={ref}
       role="log"
       aria-live="polite"
+      aria-busy={busy || streamingText !== null}
       aria-label="ข้อความในบทสนทนา"
-      className="min-h-0 min-w-0 flex-1 space-y-4 overflow-y-auto overflow-x-hidden overscroll-contain p-3 sm:p-5"
+      className="min-h-0 min-w-0 flex-1 space-y-5 overflow-y-auto overflow-x-hidden overscroll-contain p-3 sm:p-5"
     >
       {messages.map((message, i) => {
         const prev = messages[i - 1];
@@ -56,10 +57,7 @@ export function MessageList({ messages, members, streamingText, busy, onResend }
         <div data-role="model" className="flex min-w-0 max-w-full justify-start gap-2">
           <OracleGlyph />
           <HudPanel tone="cyan" className="max-w-[85%] px-3.5 py-3">
-            <p aria-hidden="true" className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-scan">
-              ORACLE
-            </p>
-            <div data-slot="content" className="min-w-0 max-w-full whitespace-pre-wrap break-words leading-relaxed text-ink [overflow-wrap:anywhere]">
+            <div data-slot="content" className="min-w-0 max-w-full whitespace-pre-wrap break-words text-ink [overflow-wrap:anywhere]">
               {streamingText}
               <span data-slot="cursor" aria-hidden="true" className="ml-0.5 inline-block text-scan motion-safe:animate-pulse">
                 ▍

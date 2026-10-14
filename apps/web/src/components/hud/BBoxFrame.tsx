@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react';
 
 const CORNERS = [
-  'left-0 top-0 origin-top-left border-l-2 border-t-2',
-  'right-0 top-0 origin-top-right border-r-2 border-t-2',
-  'bottom-0 left-0 origin-bottom-left border-b-2 border-l-2',
-  'bottom-0 right-0 origin-bottom-right border-b-2 border-r-2',
-];
+  { id: 'tl', pos: 'left-0 top-0 origin-top-left border-l-2 border-t-2' },
+  { id: 'tr', pos: 'right-0 top-0 origin-top-right border-r-2 border-t-2' },
+  { id: 'bl', pos: 'bottom-0 left-0 origin-bottom-left border-b-2 border-l-2' },
+  { id: 'br', pos: 'bottom-0 right-0 origin-bottom-right border-b-2 border-r-2' },
+] as const;
 
 type Props = {
   label: string;
@@ -14,7 +14,10 @@ type Props = {
   className?: string;
 };
 
-/** Computer-vision style detection box: 4 corner brackets plus a mono class/confidence tag. */
+/**
+ * Computer-vision style detection box: 4 corner brackets plus a class/confidence tag.
+ * Static by default; a parent `.vq-lock` plays the one-off hero "detection lock" (see index.css).
+ */
 export function BBoxFrame({ label, confidence, children, className = '' }: Props) {
   const text = confidence === undefined ? label : `${label} · conf ${confidence.toFixed(2)}`;
   return (
@@ -22,17 +25,19 @@ export function BBoxFrame({ label, confidence, children, className = '' }: Props
       <span
         aria-hidden="true"
         translate="no"
-        className="max-w-full truncate bg-scan px-1.5 py-px font-sans text-xs font-semibold leading-5 text-void"
+        data-slot="label"
+        className="max-w-full truncate bg-scan px-1.5 py-px font-sans text-xs font-semibold leading-5 text-void tabular-nums"
       >
         {text}
       </span>
       <div className="relative w-full min-w-0 p-2">
-        {CORNERS.map((pos) => (
+        {CORNERS.map((c) => (
           <span
-            key={pos}
+            key={c.id}
             data-slot="corner"
+            data-corner={c.id}
             aria-hidden="true"
-            className={`pointer-events-none absolute h-4 w-4 border-scan motion-safe:animate-detect ${pos}`}
+            className={`pointer-events-none absolute h-4 w-4 border-scan ${c.pos}`}
           />
         ))}
         {children}

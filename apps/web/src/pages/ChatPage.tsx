@@ -64,7 +64,7 @@ export function ChatPage() {
     <div className="flex h-dvh min-w-0 flex-col md:flex-row">
       <button
         type="button"
-        className="flex min-h-11 items-center gap-2 border-b border-scan/20 bg-panel/90 px-3 text-left font-sans text-sm font-semibold text-scan aria-expanded:bg-scan/10 md:hidden"
+        className="flex min-h-11 items-center gap-2 border-b border-line bg-panel px-3 text-left font-sans text-sm font-semibold text-ink transition-[background-color] motion-reduce:transition-none aria-expanded:bg-scan/10 md:hidden"
         aria-expanded={sidebarOpen}
         aria-controls={SIDEBAR_ID}
         onClick={() => setSidebarOpen((v) => !v)}
@@ -82,16 +82,6 @@ export function ChatPage() {
         onNew={handleNew}
       />
       <main className="flex min-h-0 min-w-0 flex-1 flex-col">
-        <div
-          aria-hidden="true"
-          className="flex min-w-0 items-center justify-between gap-3 border-b border-scan/20 bg-void/70 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.2em] sm:px-5"
-        >
-          <span className="truncate text-scan">ORACLE TERMINAL</span>
-          <span className="flex shrink-0 items-center gap-1.5 text-ink-muted">
-            <span className={`h-1.5 w-1.5 rounded-full ${busy ? 'bg-quest motion-safe:animate-pulse' : 'bg-scan'}`} />
-            {busy ? 'PROCESSING' : 'ONLINE'}
-          </span>
-        </div>
         <MessageList
           messages={messages}
           members={members}

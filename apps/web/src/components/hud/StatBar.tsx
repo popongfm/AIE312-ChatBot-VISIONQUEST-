@@ -17,7 +17,7 @@ export function StatBar({ name, level }: { name: string; level: number }) {
         {SEGMENTS.map((n) => (
           <span
             key={n}
-            className={`h-2.5 w-3.5 -skew-x-12 ${n <= level ? 'bg-scan shadow-[0_0_6px_var(--color-scan)]' : 'bg-line'}`}
+            className={`h-2.5 w-3.5 -skew-x-12 ${n <= level ? 'bg-scan' : 'bg-line'}`}
           />
         ))}
       </span>
