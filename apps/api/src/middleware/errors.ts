@@ -19,8 +19,8 @@ export const notFound: RequestHandler = (_req, res) => {
 };
 
 // Express identifies error handlers by their 4-argument arity.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+export const errorHandler: ErrorRequestHandler = (err, _req, res, next) => {
+  if (res.headersSent) return next(err);
   if (err instanceof HttpError) return send(res, err.status, err.code, err.message);
   const type = (err as { type?: string } | null)?.type;
   if (type === 'entity.parse.failed') return send(res, 400, 'BAD_JSON', 'Request body is not valid JSON');
