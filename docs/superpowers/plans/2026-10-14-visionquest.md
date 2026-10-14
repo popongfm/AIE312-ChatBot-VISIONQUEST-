@@ -429,7 +429,7 @@ export function genaiGenerate(apiKey: string): GenerateStream; // wraps new Goog
 
 - Behavior: a thrown error with `status === 429` before the first non-empty chunk, when `fallbackModel` is set, triggers one retry with `fallbackModel`. A 429 with no fallback, or a second 429, throws `AiRateLimitError`. Any other error, or any error after the first chunk, throws `AiError` (except a 429 before the first chunk). Empty `text` chunks are skipped.
 
-- [ ] **Step 1: Write failing tests** (inject a fake `generate`; never call the network)
+- [x] **Step 1: Write failing tests** (inject a fake `generate`; never call the network)
 
 ```ts
 test('maps history to gemini contents and yields text', async () => {
@@ -443,10 +443,10 @@ test('429 without fallback → AiRateLimitError, one call', async () => { /* cal
 test('500 → AiError, no fallback', async () => { /* calls.length === 1 */ });
 ```
 
-- [ ] **Step 2: Run** `npm test -w @vq/api -- gemini`. Expected: FAIL.
-- [ ] **Step 3: Implement** `gemini.ts`. `npm i @google/genai -w @vq/api`.
-- [ ] **Step 4: Run** the same command. Expected: PASS. Then do one manual live check: with a real `GEMINI_API_KEY`, run `tsx -e` and print the chunks for "สวัสดี". This also confirms the model names in `.env.example`.
-- [ ] **Step 5: Commit** `git commit -am "feat(api): Gemini ChatModel with 429 fallback"`
+- [x] **Step 2: Run** `npm test -w @vq/api -- gemini`. Expected: FAIL.
+- [x] **Step 3: Implement** `gemini.ts`. `npm i @google/genai -w @vq/api`.
+- [x] **Step 4: Run** the same command. Expected: PASS. Then do one manual live check: with a real `GEMINI_API_KEY`, run `tsx -e` and print the chunks for "สวัสดี". This also confirms the model names in `.env.example`.
+- [x] **Step 5: Commit** `git commit -am "feat(api): Gemini ChatModel with 429 fallback"`
 
 ---
 
