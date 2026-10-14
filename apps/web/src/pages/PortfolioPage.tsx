@@ -14,7 +14,7 @@ function prefersReducedMotion(): boolean {
 
 function Skeleton() {
   return (
-    <div aria-busy="true" aria-label="กำลังโหลด" className="mx-auto max-w-5xl space-y-4 px-4 py-14 sm:px-8">
+    <div role="status" aria-busy="true" aria-label="กำลังโหลด" className="mx-auto max-w-5xl space-y-4 px-4 py-14 sm:px-8">
       <div className="h-16 w-2/3 bg-panel" />
       <div className="h-6 w-1/2 bg-panel" />
       <div className="grid grid-cols-1 gap-8 pt-10 sm:grid-cols-2 lg:grid-cols-3">
