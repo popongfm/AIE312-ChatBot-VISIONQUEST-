@@ -17,3 +17,8 @@ export function createPool(url: string): pg.Pool {
   u.searchParams.delete('sslmode');
   return new pg.Pool({ connectionString: u.toString(), ssl: sslConfigFor(url) });
 }
+
+/** Migrations use Neon's direct URL: PgBouncer (the pooled URL) drops session state. */
+export function migrationUrlFrom(env: NodeJS.ProcessEnv): string | undefined {
+  return env.DATABASE_URL_UNPOOLED || env.DATABASE_URL || undefined;
+}

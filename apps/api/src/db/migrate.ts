@@ -1,7 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import type pg from 'pg';
-import { createPool } from './pool';
+import { createPool, migrationUrlFrom } from './pool';
 
 const MIGRATIONS_DIR = new URL('./migrations/', import.meta.url);
 
@@ -42,7 +42,7 @@ export async function runMigrations(pool: pg.Pool): Promise<string[]> {
 }
 
 async function main(): Promise<void> {
-  const url = process.env.DATABASE_URL;
+  const url = migrationUrlFrom(process.env);
   if (!url) throw new Error('DATABASE_URL is required');
   const pool = createPool(url);
   try {

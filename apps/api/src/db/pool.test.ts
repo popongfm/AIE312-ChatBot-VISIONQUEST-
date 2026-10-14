@@ -1,6 +1,6 @@
 import { afterAll, describe, expect, test } from 'vitest';
 import { testPool } from '../../test/helpers/db';
-import { createPool, sslConfigFor } from './pool';
+import { createPool, migrationUrlFrom, sslConfigFor } from './pool';
 
 describe('sslConfigFor', () => {
   test('ssl only for sslmode=require', () => {
@@ -10,6 +10,21 @@ describe('sslConfigFor', () => {
     expect(sslConfigFor('postgres://postgres:postgres@localhost:5432/visionquest_test')).toBe(
       false,
     );
+  });
+});
+
+describe('migrationUrlFrom', () => {
+  test('prefers the direct (unpooled) Neon URL', () => {
+    expect(
+      migrationUrlFrom({ DATABASE_URL: 'postgres://pooled', DATABASE_URL_UNPOOLED: 'postgres://direct' }),
+    ).toBe('postgres://direct');
+  });
+
+  test('falls back to DATABASE_URL, then undefined', () => {
+    expect(migrationUrlFrom({ DATABASE_URL: 'postgres://pooled', DATABASE_URL_UNPOOLED: '' })).toBe(
+      'postgres://pooled',
+    );
+    expect(migrationUrlFrom({})).toBeUndefined();
   });
 });
 
