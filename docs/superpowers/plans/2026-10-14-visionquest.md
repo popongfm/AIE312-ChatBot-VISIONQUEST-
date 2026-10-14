@@ -185,7 +185,7 @@ test('chat error copy is fixed Thai text', () => {
   - Test helpers: `testPool(): pg.Pool` (uses `TEST_DATABASE_URL`), `resetDb(pool)` (runs migrations, then `TRUNCATE` every table except `schema_migrations` with `RESTART IDENTITY CASCADE`).
 - Schema is exactly spec §4.1 and §4.2, plus `schema_migrations (filename TEXT PRIMARY KEY, applied_at TIMESTAMPTZ NOT NULL DEFAULT now())`. Use `CREATE EXTENSION IF NOT EXISTS pgcrypto` for `gen_random_uuid()`. Create both indexes from §4.2.
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```ts
 // config.test.ts
@@ -213,10 +213,10 @@ test('migrations are idempotent', async () => {
 test('member_skills.level must be 1..5', async () => { /* insert level 6 → rejects with check violation */ });
 ```
 
-- [ ] **Step 2: Run** `docker compose up -d db && npm test -w @vq/api`. Expected: FAIL (modules missing).
-- [ ] **Step 3: Implement.** `runMigrations` reads `migrations/*.sql` sorted by name and skips files already in `schema_migrations`. Each file runs in its own transaction together with its `schema_migrations` insert.
-- [ ] **Step 4: Run** `npm test -w @vq/api`. Expected: PASS.
-- [ ] **Step 5: Commit** `git commit -am "feat(api): config, pg pool, SQL migrations"`
+- [x] **Step 2: Run** `docker compose up -d db && npm test -w @vq/api`. Expected: FAIL (modules missing).
+- [x] **Step 3: Implement.** `runMigrations` reads `migrations/*.sql` sorted by name and skips files already in `schema_migrations`. Each file runs in its own transaction together with its `schema_migrations` insert.
+- [x] **Step 4: Run** `npm test -w @vq/api`. Expected: PASS.
+- [x] **Step 5: Commit** `git commit -am "feat(api): config, pg pool, SQL migrations"`
 
 ---
 
