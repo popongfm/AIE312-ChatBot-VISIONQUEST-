@@ -9,6 +9,7 @@
     "build": "tsc -p tsconfig.json --outDir dist"
   },
   "dependencies": {
+    "@google/genai": "^3.0.0",
     "@vq/shared": "*"
   }
 }
