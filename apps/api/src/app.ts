@@ -1,6 +1,7 @@
 import express from 'express';
 import type { Pool } from 'pg';
 import { errorHandler, notFound } from './middleware/errors';
+import { conversationsRouter } from './routes/conversations';
 import { healthRouter } from './routes/health';
 import { portfolioRouter } from './routes/portfolio';
 import type { ChatModel } from './services/gemini';
@@ -19,6 +20,7 @@ export function createApp(deps: AppDeps) {
 
   app.use('/api', healthRouter(deps));
   app.use('/api', portfolioRouter(deps));
+  app.use('/api/conversations', conversationsRouter(deps));
 
   app.use('/api', notFound);
   app.use(errorHandler);
