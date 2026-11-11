@@ -1,0 +1,47 @@
+{
+  "slug": "popong",
+  "name": "Popong Faimoon",
+  "nickname": null,
+  "role": "Lead · AI · CI/CD",
+  "bio": "นักศึกษาวิศวกรรมปัญญาประดิษฐ์และวิทยาการข้อมูลปี 3 มหาวิทยาลัยกรุงเทพ (GPAX 3.36) สร้างงาน ML แบบครบวงจร ตั้งแต่เตรียมข้อมูล ออกแบบฐานข้อมูล ไปจนถึงเทรนและประเมินโมเดล เน้น computer vision ทางการแพทย์ เป็นผู้ช่วยสอนในงาน BU x EPE Packaging AI Bootcamp (พนักงาน 60 คน) และดูแลระบบในงาน Hackathon ของคณะ เคยเป็นหัวหน้าทีมออกแบบภารกิจดาวเทียม CubeSat และได้รับคัดเลือกเป็น 1 ใน 31 ผู้เข้าร่วม ispace Lunar Mission Workshop กำลังมองหาสหกิจศึกษาด้าน Data Science เริ่มมิถุนายน 2027",
+  "avatarUrl": "/avatars/popong.jpg",
+  "sortOrder": 1,
+  "skills": [
+    { "name": "Python", "category": "ai", "level": 3 },
+    { "name": "PyTorch / torchvision", "category": "ai", "level": 3 },
+    { "name": "Ultralytics YOLO", "category": "ai", "level": 3 },
+    { "name": "Object detection & model evaluation", "category": "ai", "level": 3 },
+    { "name": "SQL / PostgreSQL (Supabase)", "category": "backend", "level": 3 },
+    { "name": "pandas / NumPy / scikit-learn", "category": "data", "level": 3 },
+    { "name": "Matplotlib / Seaborn", "category": "data", "level": 3 },
+    { "name": "NVIDIA Jetson", "category": "other", "level": 3 },
+    { "name": "ROS2", "category": "other", "level": 3 },
+    { "name": "Linux / Git", "category": "other", "level": 3 }
+  ],
+  "projects": [
+    {
+      "title": "Blood Cell Detection: YOLO vs. Faster R-CNN Benchmark",
+      "summary": "โปรเจกต์วิจัย (2025–2026) เปรียบเทียบ YOLO 12 checkpoint กับ Faster R-CNN สำหรับตรวจจับเซลล์เม็ดเลือด 3 คลาส ได้ YOLO26m เป็นตัวที่ดีที่สุดที่ mAP50 89.2% และ F1 83.9%",
+      "tech": ["Python", "PyTorch", "Ultralytics YOLO", "Faster R-CNN"],
+      "contribution": "ทำ benchmark ทั้งหมด สร้าง pipeline ประเมินผลที่ทำซ้ำได้ และพบว่าความไม่สมดุลของคลาสเป็นสาเหตุหลักของ false positive"
+    },
+    {
+      "title": "Medi-Ident AI: Medication Identification App",
+      "summary": "แอป Android (2026) ระบุยาความดันโลหิตสูง 33 ชนิดจากภาพถ่ายด้วย YOLO11s แบบเกือบเรียลไทม์ จัดแสดงในงาน PRIS 2026",
+      "tech": ["YOLO11", "PostgreSQL (Supabase)", "Android"],
+      "contribution": "รับผิดชอบชั้นฐานข้อมูลทั้งหมด ตั้งแต่ออกแบบ schema ความสัมพันธ์ของตาราง จนถึงเชื่อม API กับแอป"
+    },
+    {
+      "title": "Discord Community Management Bot",
+      "summary": "งานรับจ้าง (2026–2027) บอทที่ซิงก์ข้อมูลสมาชิกเข้า Google Sheets ให้คอมมูนิตี้ 160 คน พร้อมขั้นตอนอนุมัติสมาชิกและสำรองข้อมูลอัตโนมัติ",
+      "tech": ["Python", "discord.py", "gspread"],
+      "contribution": "พัฒนาเองทั้งหมด"
+    },
+    {
+      "title": "Robot Vision with ROS 2 and YOLO26",
+      "summary": "รายวิชา AIE495 (2026) ให้หุ่นยนต์ตรวจจับคนแบบเรียลไทม์ ทดสอบใน Gazebo",
+      "tech": ["ROS 2", "YOLO26", "Gazebo"],
+      "contribution": "Project Manager ของทีม 3 คน พัฒนาแนวคิดและเชื่อมโมเดลเข้ากับ ROS 2"
+    }
+  ]
+}

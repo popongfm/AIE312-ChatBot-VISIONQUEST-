@@ -1,0 +1,12 @@
+# seed/
+
+ข้อมูล Portfolio ที่โหลดเข้าฐานข้อมูลด้วย `npm run seed -w @vq/api` (รัน `npm run migrate -w @vq/api` ก่อน)
+
+- `team.json` ข้อมูลกลุ่ม ช่องทางติดต่อ และผลงานร่วมของทีม
+- `members/<slug>.json` สมาชิก 1 คนต่อ 1 ไฟล์ แต่ละคนกรอกของตัวเอง คัดลอกจาก `members/_template.json` (ไฟล์ที่ขึ้นต้นด้วย `_` จะไม่ถูกโหลด)
+- รูปโปรไฟล์วางที่ `apps/web/public/avatars/<slug>.jpg`
+
+กฎ: `slug` ใช้ a-z 0-9 และ - เท่านั้นและต้องตรงกับชื่อไฟล์, `category` ต้องเป็น frontend/backend/ai/data/design/other, `level` เป็นเลข 1–5,
+ฟิลด์ที่ไม่มีข้อมูลใส่ `null` ได้ ถ้ากรอกผิด `npm test` และคำสั่ง seed จะบอกชื่อไฟล์กับฟิลด์ที่ผิด
+
+ห้ามใส่ (repo เป็น public): เบอร์โทร ที่อยู่ วันเกิด อายุ เลขบัตร และห้าม commit ไฟล์ CV ต้นฉบับ
