@@ -1,0 +1,46 @@
+{
+  "slug": "natdanai",
+  "name": "Natdanai Chaiwongping",
+  "nickname": null,
+  "role": "Backend + Database",
+  "bio": "นักศึกษาวิศวกรรมปัญญาประดิษฐ์และวิทยาการข้อมูลปี 3 มหาวิทยาลัยกรุงเทพ (GPA 3.51) มีประสบการณ์ทั้งเว็บ full-stack, ชุดข้อมูล computer vision, หุ่นยนต์อุตสาหกรรม และระบบเซนเซอร์ IoT ถนัด Python, SQL, FastAPI และ Node.js และ deploy แอปด้วย Docker กับ Render เคยเป็นผู้ควบคุมหุ่นยนต์ KUKA ในงาน Open House และช่วยอาจารย์สร้างอุปกรณ์วัดระยะผ่าน Bluetooth กำลังมองหาที่ฝึกงานด้าน AI และพัฒนาซอฟต์แวร์",
+  "avatarUrl": "/avatars/natdanai.jpg",
+  "sortOrder": 2,
+  "skills": [
+    { "name": "Python", "category": "ai", "level": 3 },
+    { "name": "SQL / PostgreSQL", "category": "backend", "level": 3 },
+    { "name": "Node.js / Express", "category": "backend", "level": 3 },
+    { "name": "FastAPI", "category": "backend", "level": 3 },
+    { "name": "JavaScript / HTML / CSS", "category": "frontend", "level": 3 },
+    { "name": "Docker / Render", "category": "other", "level": 3 },
+    { "name": "pandas / NumPy / scikit-learn", "category": "data", "level": 3 },
+    { "name": "Roboflow (YOLO dataset annotation)", "category": "ai", "level": 3 },
+    { "name": "Arduino / IoT sensors", "category": "other", "level": 3 }
+  ],
+  "projects": [
+    {
+      "title": "Hotel Booking Website with AI Assistant",
+      "summary": "เว็บจองห้องพักของทีมในรายวิชา (2026) มีผู้ช่วย AI ที่ใช้ Gemini API คุยกับลูกค้าและจองห้องให้ได้",
+      "tech": ["HTML", "CSS", "JavaScript", "Gemini API", "PostgreSQL (Supabase)", "Docker", "Render"],
+      "contribution": "ทำทั้ง back end และ front end เก็บข้อมูลการจองใน PostgreSQL บน Supabase, build และ push Docker image ขึ้น Docker Hub แล้ว deploy บน Render"
+    },
+    {
+      "title": "KUKA Robot Tic-Tac-Toe Demo",
+      "summary": "หุ่นยนต์อุตสาหกรรม KUKA เล่น tic-tac-toe กับนักเรียนในงาน Open House (2026) ใช้กล้องจับภาพกระดาน หาตำแหน่ง X และ O แล้วคำนวณตาเดินที่ชนะ",
+      "tech": ["KUKA industrial robot", "Computer vision"],
+      "contribution": "ผู้ควบคุมหุ่นยนต์ (ผู้ช่วยอาจารย์) ดูแลให้ระบบทำงานได้ปลอดภัยและต่อเนื่องตลอดงาน"
+    },
+    {
+      "title": "Diabetes Medication Pill Classification",
+      "summary": "โปรเจกต์ภายใต้การดูแลของคณะ (2025) โมเดล YOLO ระบุชนิดยาเบาหวานชนิดที่ 2 จากภาพเม็ดยา",
+      "tech": ["YOLO", "Roboflow"],
+      "contribution": "เตรียมชุดภาพและทำ annotation ใน Roboflow ด้านละ 100 ภาพต่อเม็ดยาแต่ละชนิด"
+    },
+    {
+      "title": "IoT Water Quality Monitoring",
+      "summary": "โปรเจกต์ส่วนตัว (2025) วัดอุณหภูมิและความขุ่นของน้ำ แล้วส่งค่าเข้า Excel เพื่อติดตามและวิเคราะห์",
+      "tech": ["Arduino", "Sensors", "Excel"],
+      "contribution": "ต่อวงจรเซนเซอร์และเขียนโปรแกรมทั้งหมด"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "ชื่ออังกฤษพิมพ์เล็ก-ต้องตรงกับชื่อไฟล์",
+  "name": "ชื่อ นามสกุล",
+  "nickname": "ชื่อเล่น หรือ null",
+  "role": "บทบาทในทีม",
+  "bio": "แนะนำตัว 2–4 ประโยค",
+  "avatarUrl": "/avatars/<slug>.jpg",
+  "sortOrder": 9,
+  "skills": [
+    { "name": "ชื่อทักษะ", "category": "frontend | backend | ai | data | design | other", "level": 3 }
+  ],
+  "projects": [
+    {
+      "title": "ชื่อผลงาน",
+      "summary": "ผลงานนี้คืออะไร ทำเมื่อไหร่",
+      "tech": ["เทคโนโลยีที่ใช้"],
+      "repoUrl": null,
+      "demoUrl": null,
+      "imageUrl": null,
+      "contribution": "เราทำส่วนไหน"
+    }
+  ]
+}

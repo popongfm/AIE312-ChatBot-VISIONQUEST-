@@ -1,0 +1,32 @@
+{
+  "slug": "banthita",
+  "name": "บัณฑิตา สกุลงาม",
+  "nickname": "แตงกวา",
+  "role": "Frontend",
+  "bio": "นักศึกษาวิศวกรรมปัญญาประดิษฐ์และวิทยาการข้อมูล มหาวิทยาลัยกรุงเทพ ถนัด Power BI สรุป insight จากข้อมูลก้อนใหญ่ให้อยู่ในหน้าเดียว ตอบโจทย์คนทำงานและนำไปใช้ต่อได้ทันที",
+  "avatarUrl": "/avatars/banthita.jpg",
+  "sortOrder": 3,
+  "skills": [
+    { "name": "Python", "category": "data", "level": 3 },
+    { "name": "SQL / MySQL", "category": "data", "level": 3 },
+    { "name": "Power BI", "category": "data", "level": 3 },
+    { "name": "Pandas / NumPy / Scikit-learn", "category": "data", "level": 3 },
+    { "name": "Machine Learning & Deep Learning", "category": "ai", "level": 3 },
+    { "name": "HTML / CSS", "category": "frontend", "level": 3 },
+    { "name": "Git / Docker / Google Colab", "category": "other", "level": 3 }
+  ],
+  "projects": [
+    {
+      "title": "Data Analysis & Prediction Model",
+      "summary": "วิเคราะห์และทำความสะอาดชุดข้อมูลขนาดใหญ่ แล้วสร้างโมเดลทำนายผลพร้อม visual report",
+      "tech": ["Python", "Pandas", "NumPy", "Scikit-learn"],
+      "contribution": null
+    },
+    {
+      "title": "Insight & Visualization",
+      "summary": "Interactive Dashboard วิเคราะห์พฤติกรรมการซื้อซ้ำ (Cohort Analysis) และการจับคู่สินค้า (Cross-Selling) เพื่อช่วยวางแผนโปรโมชันและบริหารสต็อก",
+      "tech": ["Power BI"],
+      "contribution": null
+    }
+  ]
+}

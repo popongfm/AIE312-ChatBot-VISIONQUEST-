@@ -1,0 +1,28 @@
+{
+  "name": "VISIONQUEST",
+  "tagline": "ถาม AI ได้ทุกเรื่องเกี่ยวกับทีมเรา",
+  "concept": "เว็บ Portfolio ของกลุ่มที่ผู้เยี่ยมชมคุยกับ AI ได้โดยตรง AI ตอบจากข้อมูลจริงของทีมและสมาชิกทุกคน และบอกได้ว่าคำตอบอ้างถึงใคร",
+  "highlights": [
+    "AI ตอบแบบสตรีมทีละคำ อ้างอิงข้อมูล Portfolio จากฐานข้อมูล",
+    "สลับไปใช้โมเดลสำรองอัตโนมัติเมื่อ Gemini ติดโควตา",
+    "CI/CD อัตโนมัติ: เทสต์ทุก PR และ deploy เมื่อ merge เข้า main"
+  ],
+  "contacts": [
+    { "type": "github", "label": "GitHub", "url": "https://github.com/popongfm/AIE312-ChatBot-VISIONQUEST-" }
+  ],
+  "projects": [
+    {
+      "title": "VISIONQUEST Chat AI Portfolio",
+      "summary": "เว็บแอป Portfolio ของกลุ่มพร้อมแชต AI ที่ตอบคำถามเกี่ยวกับทีมและสมาชิกแต่ละคนจากข้อมูลจริง",
+      "tech": ["React", "Express", "TypeScript", "PostgreSQL", "Gemini API", "GitHub Actions"],
+      "repoUrl": "https://github.com/popongfm/AIE312-ChatBot-VISIONQUEST-",
+      "demoUrl": null,
+      "imageUrl": null,
+      "members": [
+        { "slug": "popong", "contribution": "หัวหน้าทีม วางโครงโปรเจกต์ ทำส่วน AI (prompt, Gemini, สตรีมคำตอบ) และ CI/CD" },
+        { "slug": "natdanai", "contribution": "Backend และฐานข้อมูล: ออกแบบตาราง PostgreSQL, migration, seed loader และ API ข้อมูล Portfolio กับประวัติแชต" },
+        { "slug": "banthita", "contribution": "Frontend: หน้า Chat, หน้า Portfolio และธีม HUD" }
+      ]
+    }
+  ]
+}
