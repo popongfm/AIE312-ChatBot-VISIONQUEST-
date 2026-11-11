@@ -6,10 +6,17 @@
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "build": "tsc -p tsconfig.json --outDir dist"
+    "build": "tsc -p tsconfig.json --outDir dist",
+    "migrate": "tsx src/db/migrate-cli.ts"
   },
   "dependencies": {
     "@google/genai": "^3.0.0",
-    "@vq/shared": "*"
+    "@vq/shared": "*",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15"
   }
 }
