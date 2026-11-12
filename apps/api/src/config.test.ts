@@ -10,6 +10,8 @@ test('defaults: port 3000, gemini settings null', () =>
     geminiApiKey: null,
     geminiModel: null,
     geminiFallbackModel: null,
+    webDir: null,
+    version: null,
   }));
 test('reads PORT and gemini settings, trimming spaces', () =>
   expect(loadConfig({ ...base, PORT: '8080', GEMINI_API_KEY: ' k ', GEMINI_MODEL: 'm', GEMINI_FALLBACK_MODEL: '' }))
@@ -21,3 +23,6 @@ test('missing or blank DATABASE_URL throws', () => {
 test('invalid PORT throws', () => {
   for (const PORT of ['abc', '0', '70000', '3.5']) expect(() => loadConfig({ ...base, PORT })).toThrow('PORT');
 });
+test('reads WEB_DIR (built web app to serve) and GIT_SHA (shown by /api/health)', () =>
+  expect(loadConfig({ ...base, WEB_DIR: ' /app/apps/web/dist ', GIT_SHA: 'abc123' }))
+    .toMatchObject({ webDir: '/app/apps/web/dist', version: 'abc123' }));

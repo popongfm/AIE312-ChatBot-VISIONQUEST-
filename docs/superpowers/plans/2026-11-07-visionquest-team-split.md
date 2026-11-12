@@ -6,6 +6,8 @@
 
 **Spec:** `specs/2026-10-14-visionquest-design.md` (rev 2) · **แผนหลัก:** `plans/2026-10-14-visionquest.md`
 
+**Production (เปลี่ยน 2026-11-12):** GitHub → Docker Hub (image) → Render (เว็บ, image เดียวมีทั้ง API และหน้าเว็บ) + Supabase (PostgreSQL) แทน Neon/Vercel — รายละเอียดและขั้นตอนตั้งค่าใน `docs/deploy.md`
+
 ## Global Constraints
 - สัญญา API ระหว่างสาย = `@vq/shared` (Task 1) — แก้ได้ผ่าน PR ที่สมาชิก 1 รีวิวเท่านั้น
 - `main` protected, ทำงานบน feature branch → PR → ต้องผ่าน `ci` (ตามสเปก §7)
@@ -27,14 +29,15 @@
 2. **Task 9 แก้ไฟล์ของ Task 8** (`routes/conversations.ts`) — สมาชิก 1 เริ่ม Task 9 หลัง Task 8 ของสมาชิก 2 merge แล้วเท่านั้น
 3. **ฝั่ง web ไม่ต้องรอ API** — สมาชิก 3 mock `api` ตามที่แผนระบุ (Task 10–12 เทสต์ด้วย mock) แล้วค่อยต่อ API จริงตอนรวมงาน
 4. **ข้อมูลจริงใน `seed/`** — แต่ละคนกรอกไฟล์ `seed/members/<slug>.json` + `apps/web/public/avatars/<slug>.jpg` ของตัวเอง (Task 16) สมาชิก 1 เป็นคนตรวจรวม
+5. **หน้าเว็บอยู่ใน image เดียวกับ API** — สมาชิก 3: `npm run build -w @vq/web` ต้องได้ `apps/web/dist/index.html` (ค่าเริ่มต้นของ Vite), เรียก API ด้วย path แบบ relative (`/api/...`) ไม่ใส่ host, และตอน dev ใช้ Vite proxy `/api` → `http://localhost:3000`
 
 ## ลำดับและเส้นทางขนาน (กำหนดส่ง > 3 สัปดาห์)
 
 | ช่วง | สมาชิก 1 | สมาชิก 2 | สมาชิก 3 |
 |---|---|---|---|
-| **สัปดาห์ 1 (วัน 1–2)** | **Task 1** (ทุกคนรอ) + เปิดบัญชี Neon/Render/Vercel/Gemini key | อ่านสเปก §4–5, เตรียม docker-compose | อ่านสเปก §6, ติดตั้ง Vite/Tailwind ในเครื่อง |
+| **สัปดาห์ 1 (วัน 1–2)** | **Task 1** (ทุกคนรอ) + เปิดบัญชี Supabase/Docker Hub/Render/Gemini key | อ่านสเปก §4–5, เตรียม docker-compose | อ่านสเปก §6, ติดตั้ง Vite/Tailwind ในเครื่อง |
 | **สัปดาห์ 1 (วัน 3–7)** | **Task 5**, เริ่ม **Task 7** | **Task 2** → **Task 3** | **Task 10** |
-| **สัปดาห์ 2** | จบ Task 7; เขียน deploy scripts ของ Task 14 ล่วงหน้า | **Task 4** → **Task 6** → **Task 8** | **Task 11** (mock API) |
+| **สัปดาห์ 2** | จบ Task 7; Dockerfile + deploy job ของ Task 14 (เสร็จแล้ว) → ตั้งค่าบัญชีตาม `docs/deploy.md` | **Task 4** → **Task 6** → **Task 8** | **Task 11** (mock API) |
 | **สัปดาห์ 3** | **Task 9** (หลัง Task 8 merge) → **Task 14** deploy จริง | ช่วยแก้ bug integration, เตรียมข้อมูลทดสอบ, รีวิว Task 9 | **Task 12** → **Task 13** |
 | **สัปดาห์ 4 (buffer)** | **Task 15** eval → **Task 16** รวมเนื้อหา, ซ้อม demo, สไลด์ | กรอก seed ของตัวเอง, แก้ bug API | กรอก seed ของตัวเอง, ขัดเกลา UI/มือถือ 360px |
 
@@ -42,7 +45,7 @@
 - **จบสัปดาห์ 1:** `npm test` ผ่านทั้ง monorepo, migrate + seed รันได้บน Postgres local
 - **จบสัปดาห์ 2:** `GET /api/portfolio` คืนข้อมูลจริง → สมาชิก 3 ต่อหน้า Portfolio กับ API จริงได้
 - **กลางสัปดาห์ 3:** แชตสตรีมจริงจาก web → API → Gemini ครบวง
-- **จบสัปดาห์ 3:** pipeline `ci → migrate → api → web → smoke` เขียวบน production, มี PR ที่ test พังเพื่อถ่ายภาพลงสไลด์
+- **จบสัปดาห์ 3:** pipeline `ci (test + Docker image) → push image → migrate + seed → Render deploy → smoke` เขียวบน production, มี PR ที่ test พังเพื่อถ่ายภาพลงสไลด์
 - **สัปดาห์ 4:** eval ≥ 10/12, ซ้อม demo ตามเช็กลิสต์ Task 16
 
 ## Review Focus (ความเสี่ยงของการแบ่งงานนี้)

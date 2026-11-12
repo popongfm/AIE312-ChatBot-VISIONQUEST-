@@ -1,0 +1,15 @@
+**/node_modules
+**/dist
+**/coverage
+**/.env
+**/.env.*
+!**/.env.example
+**/*.tsbuildinfo
+**/.DS_Store
+.git
+.github
+.superpowers
+docs
+docker
+docker-compose.yml
+2026-11-07-visionquest-team-split.md
