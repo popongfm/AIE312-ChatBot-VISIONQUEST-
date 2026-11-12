@@ -23,13 +23,14 @@ export async function ownConversation(pool: Pool, res: Response, id: string): Pr
 
 /** A user message from the request body: a non-empty string up to MAX_MESSAGE_LENGTH characters. */
 export function messageText(value: unknown, field: string): string {
-  if (typeof value !== 'string' || !value.trim()) {
+  const text = typeof value === 'string' ? value.trim() : '';
+  if (!text) {
     throw new HttpError(400, 'BAD_REQUEST', `ต้องส่ง ${field} เป็นข้อความที่ไม่ว่าง`);
   }
-  if (value.length > MAX_MESSAGE_LENGTH) {
+  if (text.length > MAX_MESSAGE_LENGTH) {
     throw new HttpError(400, 'BAD_REQUEST', `${field} ยาวได้ไม่เกิน ${MAX_MESSAGE_LENGTH} ตัวอักษร`);
   }
-  return value.trim();
+  return text;
 }
 
 /** /api/conversations — every route needs the X-Client-Id header. */

@@ -1,0 +1,9 @@
+// `npm run build`: type-checks the code that runs in production, without tests.
+// It emits nothing: the API runs from source with tsx (`npm start`), so there is no dist/ to deploy.
+// It also fails if production code imports anything from test/.
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "src" },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
+}

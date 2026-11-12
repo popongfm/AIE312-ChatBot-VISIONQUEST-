@@ -1,5 +1,5 @@
 import type { Member, MemberProject, Portfolio, SkillCategory, TeamProject } from '@vq/shared';
-import type { Pool } from 'pg';
+import type { Pool, PoolClient } from 'pg';
 
 type ProjectRow = {
   title: string; summary: string; tech: string[];
@@ -21,6 +21,23 @@ const projectFields = (p: ProjectRow) => ({
  * Each member's projects list their team projects first (isTeamProject: true), then personal ones.
  */
 export async function getPortfolio(pool: Pool): Promise<Portfolio | null> {
+  // One read-only snapshot on one connection: if `npm run seed` replaces the data mid-request,
+  // all seven queries still see the same version (ids from before and after a reseed never get mixed).
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY');
+    const result = await readPortfolio(client);
+    await client.query('COMMIT');
+    return result;
+  } catch (e) {
+    await client.query('ROLLBACK').catch(() => undefined);
+    throw e;
+  } finally {
+    client.release();
+  }
+}
+
+async function readPortfolio(pool: PoolClient): Promise<Portfolio | null> {
   const [team, contacts, members, skills, personal, teamProjects, links] = await Promise.all([
     pool.query<{ name: string; tagline: string | null; concept: string | null; highlights: string[] }>(
       'SELECT name, tagline, concept, highlights FROM team WHERE id = 1'),

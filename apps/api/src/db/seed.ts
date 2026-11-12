@@ -71,7 +71,7 @@ function parseMember(raw: unknown, file: string): SeedMember {
   const slug = r.str(m, 'slug', '');
   if (!SLUG.test(slug)) r.fail('.slug', 'must use only a-z, 0-9 and -');
   if (`${slug}.json` !== file.split('/').pop()) r.fail('.slug', `must match the file name (expected ${slug}.json)`);
-  return {
+  const member: SeedMember = {
     slug,
     name: r.str(m, 'name', ''),
     nickname: r.optStr(m, 'nickname', ''),
@@ -96,6 +96,13 @@ function parseMember(raw: unknown, file: string): SeedMember {
       };
     }),
   };
+  // member_skills has UNIQUE (member_id, name): catch it here, with the file and field, not as a database error.
+  const seen = new Set<string>();
+  member.skills.forEach((s, i) => {
+    if (seen.has(s.name)) r.fail(`.skills[${i}].name`, `"${s.name}" is listed twice`);
+    seen.add(s.name);
+  });
+  return member;
 }
 
 function parseTeam(raw: unknown, file: string): Omit<SeedData, 'members'> {
@@ -146,12 +153,15 @@ export async function readSeed(dir: string = SEED_DIR): Promise<SeedData> {
   members.sort((a, b) => a.sortOrder - b.sortOrder || a.slug.localeCompare(b.slug));
 
   const slugs = new Set(members.map((m) => m.slug));
-  teamData.teamProjects.forEach((p, i) =>
+  teamData.teamProjects.forEach((p, i) => {
+    const inProject = new Set<string>(); // team_project_members has PRIMARY KEY (team_project_id, member_id)
     p.members.forEach((pm, j) => {
-      if (!slugs.has(pm.slug)) {
-        throw new SeedError(`team.json: .projects[${i}].members[${j}].slug "${pm.slug}" has no seed/members/${pm.slug}.json`);
-      }
-    }));
+      const at = `team.json: .projects[${i}].members[${j}].slug "${pm.slug}"`;
+      if (!slugs.has(pm.slug)) throw new SeedError(`${at} has no seed/members/${pm.slug}.json`);
+      if (inProject.has(pm.slug)) throw new SeedError(`${at} is listed twice`);
+      inProject.add(pm.slug);
+    });
+  });
   return { ...teamData, members };
 }
 
