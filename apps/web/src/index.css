@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+/* Design tokens: see the team's UX/UI guideline (Foundations). */
+@theme {
+  --color-void: #0e1230;   /* page background */
+  --color-ink: #070918;    /* deeper than void: canvases, overlays */
+  --color-deck: #171c45;   /* panels, cards, AI answers */
+  --color-grid: #2b3470;   /* hairlines, quiet borders */
+  --color-ghost: #eef0ff;  /* main text */
+  --color-haze: #a9b0e0;   /* secondary text */
+  --color-stone: #ffc83d;  /* the AI's voice, the one primary button */
+  --color-signal: #58e0e8; /* links, the visitor's messages, focus, glow */
+  --color-violet: #a07bff; /* hero accent line */
+  --color-pulse: #ff2fb3;  /* tiny accents only, never text */
+  --color-fault: #ff6b81;  /* errors */
+  --color-scan: var(--color-signal);
+  --color-quest: var(--color-stone);
+
+  --font-sans: 'IBM Plex Sans Thai', system-ui, sans-serif;
+  --font-display: 'Chakra Petch', 'IBM Plex Sans Thai', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Sans Thai', ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    background: var(--color-void);
+  }
+  body {
+    margin: 0;
+    background: var(--color-void);
+    color: var(--color-ghost);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    line-height: 1.25;
+  }
+  a {
+    color: var(--color-signal);
+  }
+  a:hover {
+    color: var(--color-ghost);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--color-signal);
+    color: var(--color-void);
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@layer components {
+  /* The signature cut corner: AI answers, member cards, the primary button. */
+  .chamfer {
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  }
+  /* HUD read-outs: English, upper case, real system values only. */
+  .hud-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-signal);
+  }
+  .hud-scanlines {
+    background-image: repeating-linear-gradient(0deg, rgb(238 240 255 / 0.045) 0, rgb(238 240 255 / 0.045) 1px, transparent 1px, transparent 4px);
+  }
+  .glow-signal {
+    box-shadow: 0 0 28px rgb(88 224 232 / 0.35), inset 0 0 18px rgb(88 224 232 / 0.12);
+  }
+  .glow-text {
+    text-shadow: 0 0 28px rgb(88 224 232 / 0.45);
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-stone);
+    color: var(--color-void);
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  }
+  .btn-primary:hover {
+    background: var(--color-ghost);
+    color: var(--color-void);
+  }
+  .btn-primary:disabled {
+    background: var(--color-grid);
+    color: var(--color-haze);
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-signal);
+    border-radius: 2px;
+    color: var(--color-signal);
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 0 18px rgb(88 224 232 / 0.3), inset 0 0 12px rgb(88 224 232 / 0.12);
+  }
+  .btn-secondary:hover {
+    background: var(--color-signal);
+    color: var(--color-void);
+  }
+
+  /* Markdown inside an AI answer */
+  .vq-markdown > * + * {
+    margin-top: 0.75em;
+  }
+  .vq-markdown ul, .vq-markdown ol {
+    padding-left: 1.4em;
+  }
+  .vq-markdown ul {
+    list-style: square;
+  }
+  .vq-markdown ol {
+    list-style: decimal;
+  }
+  .vq-markdown li + li {
+    margin-top: 0.25em;
+  }
+  .vq-markdown strong {
+    font-weight: 600;
+    color: var(--color-stone);
+  }
+  .vq-markdown h1, .vq-markdown h2, .vq-markdown h3, .vq-markdown h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  .vq-markdown code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-ink);
+    padding: 0.1em 0.35em;
+  }
+  .vq-markdown pre {
+    overflow-x: auto;
+    background: var(--color-ink);
+    padding: 0.75em 1em;
+  }
+  .vq-markdown pre code {
+    padding: 0;
+  }
+  .vq-markdown table {
+    display: block;
+    overflow-x: auto;
+  }
+  .vq-markdown th, .vq-markdown td {
+    border: 1px solid var(--color-grid);
+    padding: 0.25em 0.6em;
+  }
+  .vq-markdown blockquote {
+    border-left: 2px solid var(--color-grid);
+    padding-left: 1em;
+    color: var(--color-haze);
+  }
+
+  .vq-scan {
+    animation: vq-scan 7s linear infinite;
+  }
+  .vq-blink {
+    animation: vq-blink 1s steps(1) infinite;
+  }
+  .vq-pulse {
+    animation: vq-pulse 2.4s ease-in-out infinite;
+  }
+  .vq-glitch {
+    animation: vq-glitch 7s steps(1) infinite;
+  }
+  .vq-flow {
+    animation: vq-flow 1.2s linear infinite;
+  }
+  .vq-ticker {
+    animation: vq-ticker 36s linear infinite;
+  }
+}
+
+@keyframes vq-scan {
+  from { top: 0; }
+  to { top: 100%; }
+}
+@keyframes vq-blink {
+  50% { opacity: 0; }
+}
+@keyframes vq-pulse {
+  50% { opacity: 0.4; }
+}
+@keyframes vq-glitch {
+  0%, 91%, 100% { transform: none; text-shadow: 0 0 28px rgb(88 224 232 / 0.45); }
+  92% { transform: translateX(-4px) skewX(-8deg); text-shadow: -4px 0 #ff2fb3, 4px 0 #58e0e8; }
+  94% { transform: translateX(3px); text-shadow: 3px 0 #ff2fb3, -3px 0 #58e0e8; }
+  96% { transform: none; text-shadow: -2px 0 #ff2fb3, 2px 0 #58e0e8; }
+}
+@keyframes vq-flow {
+  to { stroke-dashoffset: -80; }
+}
+@keyframes vq-ticker {
+  to { transform: translateX(-50%); }
+}
+
+/* Visitors who ask for less motion get a still page. Canvases draw one frame (see FxCanvas). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
