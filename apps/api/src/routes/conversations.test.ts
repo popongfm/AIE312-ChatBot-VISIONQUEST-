@@ -63,6 +63,11 @@ describe.skipIf(!hasTestDb)('/api/conversations', () => {
     expect(res.body.error.code).toBe('BAD_REQUEST');
   });
 
+  test('the length limit applies after trimming, so padding around a short message is fine', async () => {
+    const res = await create(`  ${'ก'.repeat(2000)}${' '.repeat(50)}`);
+    expect(res.status).toBe(201);
+  });
+
   test('GET messages returns the conversation oldest first', async () => {
     const { body: c } = await create('hi');
     await addMessage(pool, c.id, { role: 'user', content: 'hi' });

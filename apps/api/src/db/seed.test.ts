@@ -64,6 +64,18 @@ describe('readSeed', () => {
     expect((err as Error).message).toContain(message);
   });
 
+  test('rejects a skill listed twice for the same member (the database allows each skill name once)', async () => {
+    const twice = { ...ann, skills: [...ann.skills, { name: 'SQL', category: 'backend', level: 2 }] };
+    const dir = await seedDir({ 'team.json': team, 'members/ann.json': twice });
+    await expect(readSeed(dir)).rejects.toThrow('members/ann.json: .skills[1].name "SQL" is listed twice');
+  });
+
+  test('rejects a member listed twice in the same team project', async () => {
+    const p = { ...team.projects[0], members: [{ slug: 'ann', contribution: 'a' }, { slug: 'ann', contribution: 'b' }] };
+    const dir = await seedDir({ 'team.json': { ...team, projects: [p] }, 'members/ann.json': ann });
+    await expect(readSeed(dir)).rejects.toThrow('team.json: .projects[0].members[1].slug "ann" is listed twice');
+  });
+
   test('rejects a team project member with no member file', async () => {
     const dir = await seedDir({ 'team.json': team });
     await expect(readSeed(dir)).rejects.toThrow('"ann" has no seed/members/ann.json');
