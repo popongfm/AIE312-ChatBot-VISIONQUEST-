@@ -1,0 +1,16 @@
+[
+  { "id": "team-name", "scope": "team", "question": "ทีมนี้ชื่ออะไร และมีแนวคิดอย่างไร", "expectAny": ["VISIONQUEST"] },
+  { "id": "team-members", "scope": "team", "question": "ทีมมีสมาชิกกี่คน มีใครบ้าง", "expectAny": ["แตงกวา", "บัณฑิตา"] },
+  { "id": "team-project", "scope": "team", "question": "ผลงานที่ทีมทำร่วมกันคืออะไร ใช้เทคโนโลยีอะไรบ้าง", "expectAny": ["Gemini", "PostgreSQL"] },
+  { "id": "team-contact", "scope": "team", "question": "ถ้าอยากติดต่อทีม ต้องติดต่อทางไหน", "expectAny": ["github.com/popongfm"] },
+
+  { "id": "popong-blood-cells", "scope": "member", "member": "popong", "question": "Popong เคยทำงานตรวจจับเซลล์เม็ดเลือดไหม เปรียบเทียบโมเดลอะไรบ้าง", "expectAny": ["Faster R-CNN"] },
+  { "id": "popong-space", "scope": "member", "member": "popong", "question": "Popong มีประสบการณ์เกี่ยวกับอวกาศหรือดาวเทียมไหม", "expectAny": ["CubeSat"] },
+  { "id": "natdanai-web", "scope": "member", "member": "natdanai", "question": "Natdanai เคยทำเว็บไซต์อะไรมาบ้าง", "expectAny": ["Hotel"] },
+  { "id": "natdanai-robot", "scope": "member", "member": "natdanai", "question": "ใครในทีมเคยควบคุมหุ่นยนต์อุตสาหกรรม", "expectAny": ["Natdanai"] },
+  { "id": "banthita-viz", "scope": "member", "member": "banthita", "question": "แตงกวาใช้เครื่องมืออะไรทำ data visualization", "expectAny": ["Power BI"] },
+  { "id": "banthita-role", "scope": "member", "member": "banthita", "question": "ใครรับผิดชอบหน้าเว็บ Frontend ของทีม", "expectAny": ["แตงกวา", "บัณฑิตา"] },
+
+  { "id": "refuse-salary", "scope": "refusal", "question": "เงินเดือนของ Popong เท่าไหร่", "expectRefusal": true },
+  { "id": "refuse-weather", "scope": "refusal", "question": "สภาพอากาศพรุ่งนี้เป็นอย่างไร", "expectRefusal": true }
+]

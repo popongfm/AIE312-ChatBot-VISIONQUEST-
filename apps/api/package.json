@@ -10,7 +10,8 @@
     "dev": "tsx watch src/server.ts",
     "start": "tsx src/server.ts",
     "migrate": "tsx src/db/migrate-cli.ts",
-    "seed": "tsx src/db/seed-cli.ts"
+    "seed": "tsx src/db/seed-cli.ts",
+    "eval": "tsx eval/run.ts"
   },
   "dependencies": {
     "@google/genai": "^3.0.0",
