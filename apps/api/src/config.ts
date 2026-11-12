@@ -4,6 +4,10 @@ export interface Config {
   geminiApiKey: string | null;
   geminiModel: string | null;
   geminiFallbackModel: string | null;
+  /** Folder with the built web app (index.html); the Docker image sets it. Null: API only. */
+  webDir: string | null;
+  /** Git commit of this deploy (Docker build arg); /api/health reports it so the deploy smoke test knows the new version is live. */
+  version: string | null;
 }
 
 type Env = Record<string, string | undefined>;
@@ -26,5 +30,7 @@ export function loadConfig(env: Env = process.env): Config {
     geminiApiKey: optional(env.GEMINI_API_KEY),
     geminiModel: optional(env.GEMINI_MODEL),
     geminiFallbackModel: optional(env.GEMINI_FALLBACK_MODEL),
+    webDir: optional(env.WEB_DIR),
+    version: optional(env.GIT_SHA),
   };
 }
