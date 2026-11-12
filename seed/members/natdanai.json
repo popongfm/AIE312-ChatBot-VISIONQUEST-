@@ -4,7 +4,7 @@
   "nickname": null,
   "role": "Backend + Database",
   "bio": "นักศึกษาวิศวกรรมปัญญาประดิษฐ์และวิทยาการข้อมูลปี 3 มหาวิทยาลัยกรุงเทพ (GPA 3.51) มีประสบการณ์ทั้งเว็บ full-stack, ชุดข้อมูล computer vision, หุ่นยนต์อุตสาหกรรม และระบบเซนเซอร์ IoT ถนัด Python, SQL, FastAPI และ Node.js และ deploy แอปด้วย Docker กับ Render เคยเป็นผู้ควบคุมหุ่นยนต์ KUKA ในงาน Open House และช่วยอาจารย์สร้างอุปกรณ์วัดระยะผ่าน Bluetooth กำลังมองหาที่ฝึกงานด้าน AI และพัฒนาซอฟต์แวร์",
-  "avatarUrl": "/avatars/natdanai.jpg",
+  "avatarUrl": null,
   "sortOrder": 2,
   "skills": [
     { "name": "Python", "category": "ai", "level": 3 },
@@ -29,6 +29,12 @@
       "summary": "หุ่นยนต์อุตสาหกรรม KUKA เล่น tic-tac-toe กับนักเรียนในงาน Open House (2026) ใช้กล้องจับภาพกระดาน หาตำแหน่ง X และ O แล้วคำนวณตาเดินที่ชนะ",
       "tech": ["KUKA industrial robot", "Computer vision"],
       "contribution": "ผู้ควบคุมหุ่นยนต์ (ผู้ช่วยอาจารย์) ดูแลให้ระบบทำงานได้ปลอดภัยและต่อเนื่องตลอดงาน"
+    },
+    {
+      "title": "Bluetooth Distance Measurement Device",
+      "summary": "งานผู้ช่วยอาจารย์ (2026) อุปกรณ์วัดระยะทางที่ส่งผลการวัดแบบไร้สายผ่าน Bluetooth",
+      "tech": ["Bluetooth"],
+      "contribution": "ผู้ช่วยโปรเจกต์ ช่วยสร้างอุปกรณ์"
     },
     {
       "title": "Diabetes Medication Pill Classification",

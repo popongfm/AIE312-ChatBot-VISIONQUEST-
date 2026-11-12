@@ -28,7 +28,7 @@
 1. **`ChatModel` interface** — Task 4 (สมาชิก 2) ต้องใช้ type นี้ใน `AppDeps` ก่อน Task 7 เสร็จ → สมาชิก 1 ใส่ `ChatModel`, `AiRateLimitError`, `AiError` เป็น type/class เปล่าใน `apps/api/src/services/gemini.ts` ตั้งแต่ **Task 1** เพื่อไม่ให้ Task 4 ติด
 2. **Task 9 แก้ไฟล์ของ Task 8** (`routes/conversations.ts`) — สมาชิก 1 เริ่ม Task 9 หลัง Task 8 ของสมาชิก 2 merge แล้วเท่านั้น
 3. **ฝั่ง web ไม่ต้องรอ API** — สมาชิก 3 mock `api` ตามที่แผนระบุ (Task 10–12 เทสต์ด้วย mock) แล้วค่อยต่อ API จริงตอนรวมงาน
-4. **ข้อมูลจริงใน `seed/`** — แต่ละคนกรอกไฟล์ `seed/members/<slug>.json` + `apps/web/public/avatars/<slug>.jpg` ของตัวเอง (Task 16) สมาชิก 1 เป็นคนตรวจรวม
+4. **ข้อมูลจริงใน `seed/`** — แต่ละคนกรอกไฟล์ `seed/members/<slug>.json` ของตัวเอง (ไม่ใช้รูปโปรไฟล์: `avatarUrl` เป็น `null`, หน้าเว็บแสดงอักษรย่อแทน) (Task 16) สมาชิก 1 เป็นคนตรวจรวม
 5. **หน้าเว็บอยู่ใน image เดียวกับ API** — สมาชิก 3: `npm run build -w @vq/web` ต้องได้ `apps/web/dist/index.html` (ค่าเริ่มต้นของ Vite), เรียก API ด้วย path แบบ relative (`/api/...`) ไม่ใส่ host, และตอน dev ใช้ Vite proxy `/api` → `http://localhost:3000`
 
 ## ลำดับและเส้นทางขนาน (กำหนดส่ง > 3 สัปดาห์)
