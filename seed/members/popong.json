@@ -4,7 +4,7 @@
   "nickname": null,
   "role": "Lead · AI · CI/CD",
   "bio": "นักศึกษาวิศวกรรมปัญญาประดิษฐ์และวิทยาการข้อมูลปี 3 มหาวิทยาลัยกรุงเทพ (GPAX 3.36) สร้างงาน ML แบบครบวงจร ตั้งแต่เตรียมข้อมูล ออกแบบฐานข้อมูล ไปจนถึงเทรนและประเมินโมเดล เน้น computer vision ทางการแพทย์ เป็นผู้ช่วยสอนในงาน BU x EPE Packaging AI Bootcamp (พนักงาน 60 คน) และดูแลระบบในงาน Hackathon ของคณะ เคยเป็นหัวหน้าทีมออกแบบภารกิจดาวเทียม CubeSat และได้รับคัดเลือกเป็น 1 ใน 31 ผู้เข้าร่วม ispace Lunar Mission Workshop กำลังมองหาสหกิจศึกษาด้าน Data Science เริ่มมิถุนายน 2027",
-  "avatarUrl": "/avatars/popong.jpg",
+  "avatarUrl": null,
   "sortOrder": 1,
   "skills": [
     { "name": "Python", "category": "ai", "level": 3 },

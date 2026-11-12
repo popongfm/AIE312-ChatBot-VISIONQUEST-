@@ -4,7 +4,7 @@
   "nickname": "ชื่อเล่น หรือ null",
   "role": "บทบาทในทีม",
   "bio": "แนะนำตัว 2–4 ประโยค",
-  "avatarUrl": "/avatars/<slug>.jpg",
+  "avatarUrl": null,
   "sortOrder": 9,
   "skills": [
     { "name": "ชื่อทักษะ", "category": "frontend | backend | ai | data | design | other", "level": 3 }
