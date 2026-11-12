@@ -37,28 +37,27 @@ export async function getPortfolio(pool: Pool): Promise<Portfolio | null> {
   }
 }
 
-async function readPortfolio(pool: PoolClient): Promise<Portfolio | null> {
-  const [team, contacts, members, skills, personal, teamProjects, links] = await Promise.all([
-    pool.query<{ name: string; tagline: string | null; concept: string | null; highlights: string[] }>(
-      'SELECT name, tagline, concept, highlights FROM team WHERE id = 1'),
-    pool.query<{ type: string; label: string; url: string }>(
-      'SELECT type, label, url FROM contacts ORDER BY sort_order, id'),
-    pool.query<{
-      id: number; slug: string; name: string; nickname: string | null; role: string;
-      bio: string | null; avatar_url: string | null; sort_order: number;
-    }>('SELECT id, slug, name, nickname, role, bio, avatar_url, sort_order FROM members ORDER BY sort_order, slug'),
-    pool.query<{ member_id: number; name: string; category: SkillCategory; level: number }>(
-      'SELECT member_id, name, category, level FROM member_skills ORDER BY member_id, sort_order, id'),
-    pool.query<ProjectRow & { member_id: number; contribution: string | null }>(
-      `SELECT member_id, title, summary, tech, repo_url, demo_url, image_url, contribution
-       FROM member_projects ORDER BY member_id, sort_order, id`),
-    pool.query<ProjectRow & { id: number }>(
-      'SELECT id, title, summary, tech, repo_url, demo_url, image_url FROM team_projects ORDER BY sort_order, id'),
-    pool.query<LinkRow>(
-      `SELECT tpm.team_project_id, tpm.member_id, tpm.contribution, m.slug, m.name, m.nickname
-       FROM team_project_members tpm JOIN members m ON m.id = tpm.member_id
-       ORDER BY m.sort_order, m.slug`),
-  ]);
+/** One query at a time: a single client can't run queries concurrently (pg 9 drops support for queuing them). */
+async function readPortfolio(db: PoolClient): Promise<Portfolio | null> {
+  const team = await db.query<{ name: string; tagline: string | null; concept: string | null; highlights: string[] }>(
+    'SELECT name, tagline, concept, highlights FROM team WHERE id = 1');
+  const contacts = await db.query<{ type: string; label: string; url: string }>(
+    'SELECT type, label, url FROM contacts ORDER BY sort_order, id');
+  const members = await db.query<{
+    id: number; slug: string; name: string; nickname: string | null; role: string;
+    bio: string | null; avatar_url: string | null; sort_order: number;
+  }>('SELECT id, slug, name, nickname, role, bio, avatar_url, sort_order FROM members ORDER BY sort_order, slug');
+  const skills = await db.query<{ member_id: number; name: string; category: SkillCategory; level: number }>(
+    'SELECT member_id, name, category, level FROM member_skills ORDER BY member_id, sort_order, id');
+  const personal = await db.query<ProjectRow & { member_id: number; contribution: string | null }>(
+    `SELECT member_id, title, summary, tech, repo_url, demo_url, image_url, contribution
+     FROM member_projects ORDER BY member_id, sort_order, id`);
+  const teamProjects = await db.query<ProjectRow & { id: number }>(
+    'SELECT id, title, summary, tech, repo_url, demo_url, image_url FROM team_projects ORDER BY sort_order, id');
+  const links = await db.query<LinkRow>(
+    `SELECT tpm.team_project_id, tpm.member_id, tpm.contribution, m.slug, m.name, m.nickname
+     FROM team_project_members tpm JOIN members m ON m.id = tpm.member_id
+     ORDER BY m.sort_order, m.slug`);
 
   const t = team.rows[0];
   if (!t) return null;
