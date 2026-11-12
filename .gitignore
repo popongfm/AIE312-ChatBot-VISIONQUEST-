@@ -8,3 +8,5 @@ dist
 coverage
 *.tsbuildinfo
 2026-11-07-visionquest-team-split.md
+# Original CVs/resumes: personal data, never commit (repo is public). Copy only what belongs on the site into seed/members/<slug>.json.
+*.pdf

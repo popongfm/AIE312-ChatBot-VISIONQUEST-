@@ -31,6 +31,12 @@
       "contribution": "ผู้ควบคุมหุ่นยนต์ (ผู้ช่วยอาจารย์) ดูแลให้ระบบทำงานได้ปลอดภัยและต่อเนื่องตลอดงาน"
     },
     {
+      "title": "Bluetooth Distance Measurement Device",
+      "summary": "งานผู้ช่วยอาจารย์ (2026) อุปกรณ์วัดระยะทางที่ส่งผลการวัดแบบไร้สายผ่าน Bluetooth",
+      "tech": ["Bluetooth"],
+      "contribution": "ผู้ช่วยโปรเจกต์ ช่วยสร้างอุปกรณ์"
+    },
+    {
       "title": "Diabetes Medication Pill Classification",
       "summary": "โปรเจกต์ภายใต้การดูแลของคณะ (2025) โมเดล YOLO ระบุชนิดยาเบาหวานชนิดที่ 2 จากภาพเม็ดยา",
       "tech": ["YOLO", "Roboflow"],

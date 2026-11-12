@@ -10,12 +10,14 @@
     { "name": "Python", "category": "ai", "level": 3 },
     { "name": "PyTorch / torchvision", "category": "ai", "level": 3 },
     { "name": "Ultralytics YOLO", "category": "ai", "level": 3 },
+    { "name": "Roboflow", "category": "ai", "level": 3 },
     { "name": "Object detection & model evaluation", "category": "ai", "level": 3 },
     { "name": "SQL / PostgreSQL (Supabase)", "category": "backend", "level": 3 },
     { "name": "pandas / NumPy / scikit-learn", "category": "data", "level": 3 },
     { "name": "Matplotlib / Seaborn", "category": "data", "level": 3 },
     { "name": "NVIDIA Jetson", "category": "other", "level": 3 },
     { "name": "ROS2", "category": "other", "level": 3 },
+    { "name": "Google Drive & Sheets APIs (gspread)", "category": "other", "level": 3 },
     { "name": "Linux / Git", "category": "other", "level": 3 }
   ],
   "projects": [
@@ -42,6 +44,18 @@
       "summary": "รายวิชา AIE495 (2026) ให้หุ่นยนต์ตรวจจับคนแบบเรียลไทม์ ทดสอบใน Gazebo",
       "tech": ["ROS 2", "YOLO26", "Gazebo"],
       "contribution": "Project Manager ของทีม 3 คน พัฒนาแนวคิดและเชื่อมโมเดลเข้ากับ ROS 2"
+    },
+    {
+      "title": "Game Genre Preference Prediction",
+      "summary": "รายวิชา AIE225 (พฤษภาคม 2026) ทำแบบสำรวจตาม PDPA เก็บคำตอบ 109 ชุดเรื่องแรงจูงใจและพฤติกรรมการเล่นเกม แล้วทำนายแนวเกมที่ชอบ 8 แนวด้วย Random Forest แบบ multi-label (F1 สูงสุด 0.62 RPG และ 0.61 MOBA)",
+      "tech": ["Python", "pandas", "scikit-learn"],
+      "contribution": "ร่วมออกแบบแบบสำรวจ ทำความสะอาดและเข้ารหัสข้อมูล Likert และ multi-select และพบว่าความไม่สมดุลของคลาสทำให้ recall ของแนวเกมส่วนน้อยต่ำ"
+    },
+    {
+      "title": "Gamma-Ray Burst CubeSat Mission Concept",
+      "summary": "การแข่งขัน GISTDA School Satellite Competition (ธันวาคม 2025) ออกแบบภารกิจดาวเทียม CubeSat ขนาด 6U สำหรับตรวจจับ gamma-ray burst ด้วย coded aperture imaging",
+      "tech": ["CubeSat 6U", "CZT detector", "Coded aperture imaging"],
+      "contribution": "หัวหน้าทีม 5 คน แปลงผลการค้นคว้าเป็นความต้องการของ payload และออกแบบสถาปัตยกรรมระบบ รวมถึง payload ตัวตรวจจับ CZT"
     }
   ]
 }
