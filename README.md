@@ -8,7 +8,7 @@
 ```sh
 npm install
 docker compose up -d                      # PostgreSQL (dev + test database)
-cp apps/api/.env.example apps/api/.env    # ใส่ GEMINI_API_KEY / GEMINI_MODEL ถ้าจะใช้แชต
+cp -n apps/api/.env.example apps/api/.env # -n: ไม่ทับ .env เดิม · ใส่ GEMINI_API_KEY / GEMINI_MODEL ถ้าจะใช้แชต
 npm run migrate -w @vq/api
 npm run seed -w @vq/api
 npm run dev -w @vq/api                    # http://localhost:3000/api/health
