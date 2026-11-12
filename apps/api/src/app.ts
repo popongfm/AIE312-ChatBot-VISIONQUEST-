@@ -21,6 +21,8 @@ export interface AppDeps {
 export function createApp(deps: AppDeps) {
   const app = express();
   app.disable('x-powered-by');
+  // Render (and Cloudflare in front of it) is one proxy hop away: use the visitor's IP for the per-IP rate limit.
+  app.set('trust proxy', 1);
   app.use(express.json({ limit: '16kb' }));
 
   app.use('/api', healthRouter(deps));
