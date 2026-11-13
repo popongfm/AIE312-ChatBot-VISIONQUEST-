@@ -10,7 +10,7 @@ Oracle ตอบเรื่องทีมและสมาชิกแต่�
 |---|---|
 | Popong Faimoon | Lead · AI · CI/CD |
 | Natdanai Chaiwongping | Backend + Database |
-| บัณฑิตา สกุลงาม (แตงกวา) | Frontend |
+| Banthita Sakulngam | Frontend |
 
 ## สถาปัตยกรรม
 
