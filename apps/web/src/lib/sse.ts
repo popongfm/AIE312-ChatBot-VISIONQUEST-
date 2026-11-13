@@ -1,6 +1,6 @@
 import type { ChatStreamEvent } from '@vq/shared';
 
-const KNOWN = new Set(['token', 'done', 'error']);
+const KNOWN = new Set(['token', 'reset', 'done', 'error']);
 
 /**
  * Turns the raw text of a Server-Sent Events stream into chat events.

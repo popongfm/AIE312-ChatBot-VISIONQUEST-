@@ -114,6 +114,10 @@ export function useChat(): Chat {
         if (e.type === 'token') {
           text += e.text;
           setStreamingText(text);
+        } else if (e.type === 'reset') {
+          // The API is regenerating the answer after a hiccup: start the bubble over.
+          text = '';
+          setStreamingText('');
         } else if (e.type === 'done') {
           add({ role: 'model', content: text, citedMembers: e.citedMembers });
           text = '';
