@@ -1,5 +1,5 @@
 /**
- * Live AI grounding eval (Task 15): asks Oracle 12 questions, scores each answer, writes eval/results.md.
+ * Live AI grounding eval (Task 15): asks Vision 12 questions, scores each answer, writes eval/results.md.
  * Each question is a fresh single-turn chat. Exits 1 if fewer than 10 of 12 pass.
  *
  *   npm run eval -w @vq/api                     local: needs DATABASE_URL (seeded) + GEMINI_API_KEY/GEMINI_MODEL in apps/api/.env
@@ -86,12 +86,12 @@ const cell = (s: string) => s.replace(/\|/g, '\\|').replace(/\s*\n\s*/g, '<br>')
 function report(results: Result[], label: string): string {
   const passed = results.filter((r) => r.pass).length;
   const lines = [
-    '# Oracle AI eval results',
+    '# Vision AI eval results',
     '',
     `${new Date().toISOString()} · ${label} · **${passed}/${results.length} passed** (pass mark ${PASS_MARK})`,
     '',
     'Each question is a fresh single-turn chat. `team`/`member` pass when the answer names a fact from `seed/`;',
-    '`refusal` passes when Oracle says it has no data instead of guessing. Questions: `apps/api/eval/questions.json`.',
+    '`refusal` passes when Vision says it has no data instead of guessing. Questions: `apps/api/eval/questions.json`.',
     '',
     '| id | scope | pass |',
     '|---|---|---|',
@@ -119,7 +119,7 @@ async function main() {
   const { ask, label, close } = site ? remoteAsker(site) : await localAsker();
   const questions = await loadQuestions();
   const results: Result[] = [];
-  console.log(`Oracle eval — ${label}\n`);
+  console.log(`Vision eval — ${label}\n`);
   try {
     for (const [i, q] of questions.entries()) {
       if (i > 0) await sleep(GAP_MS);

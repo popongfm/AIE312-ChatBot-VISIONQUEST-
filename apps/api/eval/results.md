@@ -1,9 +1,9 @@
-# Oracle AI eval results
+# Vision AI eval results
 
 2026-11-12T15:32:58.494Z · remote · https://visionquest-htn7.onrender.com · **12/12 passed** (pass mark 10)
 
 Each question is a fresh single-turn chat. `team`/`member` pass when the answer names a fact from `seed/`;
-`refusal` passes when Oracle says it has no data instead of guessing. Questions: `apps/api/eval/questions.json`.
+`refusal` passes when Vision says it has no data instead of guessing. Questions: `apps/api/eval/questions.json`.
 
 | id | scope | pass |
 |---|---|---|

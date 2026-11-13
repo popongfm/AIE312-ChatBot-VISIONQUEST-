@@ -37,10 +37,11 @@ export function ChatPage() {
   }, [ask, send, setSearchParams]);
 
   const empty = chat.messages.length === 0 && !chat.busy;
-  const title = chat.conversations.find((c) => c.id === chat.activeId)?.title ?? 'คุยกับ Oracle';
+  const title = chat.conversations.find((c) => c.id === chat.activeId)?.title ?? 'คุยกับ Vision';
 
   return (
     <div className="flex min-h-dvh flex-col lg:grid lg:grid-cols-[300px_minmax(0,1fr)]">
+      <FxCanvas kind="stars" className="fixed inset-0 -z-10 h-dvh w-full" />
       <Sidebar
         conversations={chat.conversations}
         activeId={chat.activeId}
@@ -62,7 +63,7 @@ export function ChatPage() {
           )}
           <MessageList messages={chat.messages} streamingText={chat.streamingText} members={members} />
         </div>
-        <div className="sticky bottom-0 border-t border-grid bg-void">
+        <div className="sticky bottom-0 border-t border-grid bg-void/85 backdrop-blur-md">
           <div className="mx-auto w-full max-w-[840px] px-4 pt-4 pb-5 sm:px-8">
             <Composer disabled={chat.busy} onSend={(content) => void send(content)} />
           </div>

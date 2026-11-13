@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { StatBar } from '../hud/StatBar';
 
-/** Chat link that asks Oracle about one member. ChatPage sends the `ask` question once and removes it from the URL. */
+/** Chat link that asks Vision about one member. ChatPage sends the `ask` question once and removes it from the URL. */
 export function askHref(nickname: string): string {
   return `/chat?ask=${encodeURIComponent(`${nickname} ทำโปรเจกต์อะไรบ้าง และถนัดอะไร`)}`;
 }
@@ -72,7 +72,7 @@ export function MemberDetail({ member, onClose }: { member: Member; onClose(): v
         </section>
 
         <Link to={askHref(name)} className="btn-primary min-h-12 self-start px-6 py-2 text-[17px]">
-          ถาม Oracle เกี่ยวกับ {name}
+          ถาม Vision เกี่ยวกับ {name}
         </Link>
       </div>
     </div>

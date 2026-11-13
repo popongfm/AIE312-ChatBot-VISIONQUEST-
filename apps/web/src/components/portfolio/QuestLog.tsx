@@ -1,9 +1,10 @@
 import { displayName, type TeamProject } from '@vq/shared';
+import { DecodeText } from '../hud/DecodeText';
 
 export function QuestLog({ projects }: { projects: TeamProject[] }) {
   return (
-    <section id="work" aria-labelledby="quest-title" className="flex scroll-mt-6 flex-col gap-6 border-t border-grid py-16 sm:py-[72px]">
-      <h2 id="quest-title" className="text-[clamp(1.75rem,4vw,2.5rem)] font-semibold">ผลงานที่ทำร่วมกัน</h2>
+    <section id="work" aria-labelledby="quest-title" className="flex scroll-mt-24 flex-col gap-6 border-t border-grid py-16 sm:py-[72px]">
+      <h2 id="quest-title" className="text-[clamp(1.75rem,4vw,2.5rem)] font-semibold"><DecodeText text="ผลงานที่ทำร่วมกัน" /></h2>
       {projects.length === 0 ? <p className="text-haze">ยังไม่มีข้อมูลผลงานของทีม</p> : (
         <ul className="flex flex-col">
           {projects.map((p) => (

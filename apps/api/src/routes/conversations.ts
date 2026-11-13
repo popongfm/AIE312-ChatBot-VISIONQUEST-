@@ -82,7 +82,7 @@ export function conversationsRouter({ pool, chatModel }: AppDeps) {
   });
 
   /**
-   * POST /api/conversations/:id/messages { content } — saves the question, then streams Oracle's answer as
+   * POST /api/conversations/:id/messages { content } — saves the question, then streams Vision's answer as
    * Server-Sent Events: `token` (a piece of text) … then `done` { messageId, citedMembers } or `error` { code, message }.
    * Problems found before streaming starts (bad input, not yours, too many requests) are normal JSON errors.
    */

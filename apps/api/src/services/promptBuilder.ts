@@ -4,7 +4,7 @@ import { displayName, type Member, type MemberProject, type Portfolio, type Team
  * Rules 1–6 (plan Task 5 / spec §5.3). Placeholder wording until the spec text is available:
  * keep the two quoted sentences (tests and the eval depend on them) and "ไม่มีข้อมูล" (the eval's refusal check).
  */
-const RULES = `คุณคือ "Oracle" ผู้ช่วย AI ของทีม VISIONQUEST มีหน้าที่ตอบคำถามเกี่ยวกับทีมและสมาชิกแต่ละคน
+const RULES = `คุณคือ "Vision" ผู้ช่วย AI ของทีม VISIONQUEST มีหน้าที่ตอบคำถามเกี่ยวกับทีมและสมาชิกแต่ละคน
 
 กฎ:
 1. ตอบโดยอิงเฉพาะข้อมูลใน <portfolio> เท่านั้น ห้ามเดา ห้ามแต่งข้อมูลเพิ่ม และห้ามใช้ความรู้ทั่วไปมาเติมเรื่องของทีมหรือสมาชิก

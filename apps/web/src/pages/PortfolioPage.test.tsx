@@ -48,7 +48,7 @@ test('renders team, all members with anchors, team projects, contacts', async ()
   expect(screen.getByRole('heading', { name: portfolio.teamProjects[0].title })).toBeInTheDocument();
   expect(screen.getByText('ทำส่วน AI')).toBeInTheDocument();
   expect(screen.getByRole('link', { name: portfolio.contacts[0].label })).toHaveAttribute('href', portfolio.contacts[0].url);
-  expect(screen.getAllByRole('link', { name: 'คุยกับ Oracle' })[0]).toHaveAttribute('href', '/chat');
+  expect(screen.getAllByRole('link', { name: 'คุยกับ Vision' })[0]).toHaveAttribute('href', '/chat');
 });
 
 test('pings health on mount', async () => {
@@ -78,7 +78,7 @@ test('opening a member shows bio, skills, projects and an ask link; Escape close
   expect(within(dialog).getByText('ทำ AI และ CI/CD')).toBeInTheDocument();
   expect(within(dialog).getByRole('meter', { name: 'React' })).toHaveAttribute('aria-valuenow', '1');
   expect(within(dialog).getByText('Blood Cell Detection')).toBeInTheDocument();
-  expect(within(dialog).getByRole('link', { name: 'ถาม Oracle เกี่ยวกับ Mickie' })).toHaveAttribute(
+  expect(within(dialog).getByRole('link', { name: 'ถาม Vision เกี่ยวกับ Mickie' })).toHaveAttribute(
     'href', '/chat?ask=' + encodeURIComponent('Mickie ทำโปรเจกต์อะไรบ้าง และถนัดอะไร'),
   );
   await userEvent.keyboard('{Escape}');
@@ -103,7 +103,7 @@ test('a #member-… link scrolls to that card after loading', async () => {
 
 test('the hero question box opens chat with that question', async () => {
   renderAt();
-  const box = await screen.findByRole('textbox', { name: 'คำถามถึง Oracle' });
+  const box = await screen.findByRole('textbox', { name: 'คำถามถึง Vision' });
   await userEvent.type(box, 'ทีมนี้ถนัดอะไร{Enter}');
   expect(screen.getByTestId('location').textContent).toBe('/chat?ask=' + encodeURIComponent('ทีมนี้ถนัดอะไร'));
 });

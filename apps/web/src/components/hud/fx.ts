@@ -2,7 +2,7 @@
  * The four animated scenes of the site, drawn on a <canvas>: no image files, sharp at every size.
  * Each scene is a pure function of time so it can be tested without a browser.
  */
-export type FxKind = 'sphere' | 'mesh' | 'stream' | 'core';
+export type FxKind = 'sphere' | 'mesh' | 'stream' | 'core' | 'stars';
 export type FxState = Record<string, unknown>;
 
 type P3 = [number, number, number];
@@ -41,9 +41,23 @@ const SPHERE = buildSphere();
 /** Shown on the HUD: the real number of links in the sphere. */
 export const SPHERE_LINKS = SPHERE.edges.length;
 
-function drawSphere(c: CanvasRenderingContext2D, w: number, h: number, t: number): void {
+/** Where the pointer is over a canvas, from -1 to 1 on each axis (0,0 = centre). Set by FxCanvas; absent on touch screens. */
+function pointerOf(st: FxState): [number, number] | null {
+  const p = st.pointer as [number, number] | undefined;
+  if (!p || !Number.isFinite(p[0]) || !Number.isFinite(p[1])) return null;
+  return [Math.max(-1, Math.min(1, p[0])), Math.max(-1, Math.min(1, p[1]))];
+}
+
+function drawSphere(c: CanvasRenderingContext2D, w: number, h: number, t: number, st: FxState): void {
   const R = Math.min(w, h) * 0.3, cx = w / 2, cy = h / 2;
-  const ca = Math.cos(t * 0.22), sa = Math.sin(t * 0.22), cb = Math.cos(0.38), sb = Math.sin(0.38);
+  // The sphere leans toward the pointer, easing a little each frame.
+  const p = pointerOf(st) ?? [0, 0];
+  const lean = (st.lean as [number, number] | undefined) ?? [0, 0];
+  lean[0] += (p[0] - lean[0]) * 0.06;
+  lean[1] += (p[1] - lean[1]) * 0.06;
+  st.lean = lean;
+  const yaw = t * 0.22 + lean[0] * 0.7, tilt = 0.38 + lean[1] * 0.45;
+  const ca = Math.cos(yaw), sa = Math.sin(yaw), cb = Math.cos(tilt), sb = Math.sin(tilt);
   const q: P3[] = SPHERE.points.map((p) => {
     const x = p[0] * ca + p[2] * sa, z0 = -p[0] * sa + p[2] * ca;
     const y = p[1] * cb - z0 * sb, z = p[1] * sb + z0 * cb;
@@ -207,10 +221,50 @@ function drawCore(c: CanvasRenderingContext2D, w: number, h: number, t: number, 
   c.globalAlpha = 1;
 }
 
+/** Drifting points that link to their neighbours and to the pointer: the page background. */
+function drawStars(c: CanvasRenderingContext2D, w: number, h: number, t: number, st: FxState): void {
+  if (!st.stars) {
+    const r = rnd(41), n = Math.max(30, Math.min(110, Math.round((w * h) / 14000)));
+    st.stars = Array.from({ length: n }, () => [r(), r(), (r() - 0.5) * 0.012, (r() - 0.5) * 0.012, 0.6 + r() * 1.4, r() * 6.28]);
+  }
+  const wrap = (v: number) => ((v % 1) + 1) % 1;
+  const pts = (st.stars as number[][]).map((s) => [wrap(s[0] + s[2] * t) * w, wrap(s[1] + s[3] * t) * h, s[4], s[5]]);
+  const reach = 130;
+  c.lineWidth = 1; c.strokeStyle = '#A9B0E0';
+  for (let i = 0; i < pts.length; i++) {
+    for (let j = i + 1; j < pts.length; j++) {
+      const d = Math.hypot(pts[i][0] - pts[j][0], pts[i][1] - pts[j][1]);
+      if (d < reach) {
+        c.globalAlpha = (1 - d / reach) * 0.22;
+        c.beginPath(); c.moveTo(pts[i][0], pts[i][1]); c.lineTo(pts[j][0], pts[j][1]); c.stroke();
+      }
+    }
+  }
+  const p = pointerOf(st);
+  if (p) {
+    const px = (p[0] * 0.5 + 0.5) * w, py = (p[1] * 0.5 + 0.5) * h;
+    c.strokeStyle = '#58E0E8';
+    for (const s of pts) {
+      const d = Math.hypot(s[0] - px, s[1] - py);
+      if (d < 190) {
+        c.globalAlpha = (1 - d / 190) * 0.6;
+        c.beginPath(); c.moveTo(px, py); c.lineTo(s[0], s[1]); c.stroke();
+      }
+    }
+  }
+  pts.forEach((s, i) => {
+    c.fillStyle = i % 9 === 0 ? '#58E0E8' : i % 13 === 0 ? '#A07BFF' : '#EEF0FF';
+    c.globalAlpha = 0.35 + 0.35 * (0.5 + 0.5 * Math.sin(t * 1.2 + s[3]));
+    c.beginPath(); c.arc(s[0], s[1], s[2], 0, TAU); c.fill();
+  });
+  c.globalAlpha = 1;
+}
+
 /** Draws one frame of a scene. `state` belongs to one canvas and keeps per-scene random values between frames. */
 export function drawFx(kind: FxKind, c: CanvasRenderingContext2D, w: number, h: number, time: number, state: FxState): void {
   const t = Math.max(0, time); // scenes index arrays by time: never go below zero
-  if (kind === 'sphere') drawSphere(c, w, h, t);
+  if (kind === 'sphere') drawSphere(c, w, h, t, state);
+  else if (kind === 'stars') drawStars(c, w, h, t, state);
   else if (kind === 'mesh') drawMesh(c, w, h, t, state);
   else if (kind === 'stream') drawStream(c, w, h, t);
   else drawCore(c, w, h, t, state);

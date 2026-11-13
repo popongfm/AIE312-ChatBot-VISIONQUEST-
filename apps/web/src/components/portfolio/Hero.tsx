@@ -2,6 +2,7 @@ import type { Team } from '@vq/shared';
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BBoxFrame } from '../hud/BBoxFrame';
+import { DecodeText } from '../hud/DecodeText';
 import { SPHERE_LINKS, SPHERE_NODES } from '../hud/fx';
 import { FxCanvas } from '../hud/FxCanvas';
 import { Corners } from '../hud/marks';
@@ -75,7 +76,7 @@ export function Hero({ team, memberCount, health }: { team: Team; memberCount: n
   return (
     <header
       id="top"
-      className="relative isolate flex flex-col gap-10 overflow-hidden bg-[linear-gradient(100deg,#0B2B52_0%,#0E1230_46%,#3A1257_100%)] px-5 pt-14 pb-9 sm:px-8"
+      className="relative isolate flex flex-col gap-10 overflow-hidden border border-grid bg-[linear-gradient(100deg,#06182F_0%,#04050C_46%,#210B36_100%)] px-5 pt-14 pb-9 sm:px-8"
     >
       <FxCanvas kind="stream" className="absolute inset-0 -z-10 h-full w-full" />
       <div aria-hidden="true" className="hud-scanlines pointer-events-none absolute inset-0 -z-10" />
@@ -109,7 +110,7 @@ export function Hero({ team, memberCount, health }: { team: Team; memberCount: n
 
         <div className="order-1 flex min-w-0 flex-[3_1_380px] flex-col gap-7 lg:order-3">
           <BBoxFrame label="Team // AIE312">
-            <h1 className="vq-glitch glow-text text-[clamp(2rem,4.4vw,3.75rem)] leading-[1.15] font-bold tracking-tight break-words">{team.name}</h1>
+            <h1 className="vq-glitch glow-text text-[clamp(2rem,4.4vw,3.75rem)] leading-[1.15] font-bold tracking-tight break-words"><DecodeText text={team.name} /></h1>
           </BBoxFrame>
           {team.tagline && (
             <p className="font-display text-[clamp(1.375rem,3vw,2.25rem)] leading-[1.3] font-semibold text-balance text-violet">
@@ -118,7 +119,7 @@ export function Hero({ team, memberCount, health }: { team: Team; memberCount: n
             </p>
           )}
           <form onSubmit={onSubmit} className="flex max-w-[560px] flex-wrap gap-3">
-            <label htmlFor="hero-ask" className="sr-only">คำถามถึง Oracle</label>
+            <label htmlFor="hero-ask" className="sr-only">คำถามถึง Vision</label>
             <div className="glow-signal flex h-[60px] min-w-0 flex-[999_1_240px] items-center gap-3 rounded-[2px] border border-signal bg-void px-5 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-signal">
               <span aria-hidden="true" className="font-mono text-xl text-stone">›</span>
               <input
@@ -139,7 +140,7 @@ export function Hero({ team, memberCount, health }: { team: Team; memberCount: n
 
       <div className="flex flex-wrap justify-between gap-x-6 gap-y-3">
         <a href="#team" className="flex min-h-14 items-center border-l-[3px] border-ghost bg-void/80 pr-5 pl-5 font-display text-lg font-semibold text-ghost no-underline hover:text-signal">อ่านแนวคิดทีม</a>
-        <Link to="/chat" className="flex min-h-14 items-center border-r-[3px] border-ghost bg-void/80 pr-5 pl-5 font-display text-lg font-semibold text-ghost no-underline hover:text-signal">คุยกับ Oracle</Link>
+        <Link to="/chat" className="flex min-h-14 items-center border-r-[3px] border-ghost bg-void/80 pr-5 pl-5 font-display text-lg font-semibold text-ghost no-underline hover:text-signal">คุยกับ Vision</Link>
       </div>
     </header>
   );

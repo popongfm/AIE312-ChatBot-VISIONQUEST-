@@ -3,7 +3,7 @@ export function Logo({ size = 40 }: { size?: number }) {
   return (
     <svg aria-hidden="true" width={size} height={size} viewBox="0 0 100 100" className="flex-none">
       <ellipse cx="50" cy="50" rx="46" ry="14" fill="none" stroke="#A07BFF" strokeWidth="3" transform="rotate(-20 50 50)" />
-      <circle cx="50" cy="50" r="28" fill="#0E1230" stroke="#58E0E8" strokeWidth="4" />
+      <circle cx="50" cy="50" r="28" fill="#04050C" stroke="#58E0E8" strokeWidth="4" />
       <path d="M30 42L48 30L68 40L72 58L54 72L34 62ZM30 42L54 50L68 40M48 30L54 50L72 58M34 62L54 50L54 72" fill="none" stroke="#EEF0FF" strokeWidth="2.5" strokeLinejoin="round" />
       <circle cx="54" cy="50" r="4.5" fill="#FFC83D" />
       <circle cx="93" cy="34" r="4.5" fill="#A07BFF" />

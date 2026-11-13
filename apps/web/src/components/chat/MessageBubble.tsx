@@ -11,7 +11,7 @@ const WRAP = 'min-w-0 break-words [overflow-wrap:anywhere]';
 export function MessageBubble({ message, members, streaming = false }: { message: UiMessage; members: Member[]; streaming?: boolean }) {
   if (message.role === 'user') {
     return (
-      <div data-role="user" className="flex justify-end">
+      <div data-role="user" className="msg-in flex justify-end">
         <HudPanel tone="cyan" className="max-w-[85%] min-w-0 px-4 py-3">
           <div data-testid="bubble-content" className={`whitespace-pre-wrap ${WRAP}`}>{message.content}</div>
         </HudPanel>
@@ -20,7 +20,7 @@ export function MessageBubble({ message, members, streaming = false }: { message
   }
   if (message.role === 'error') {
     return (
-      <div data-role="error" className="flex justify-start">
+      <div data-role="error" className="msg-in flex justify-start">
         <div role="alert" data-testid="bubble-content" className={`max-w-[92%] rounded-[2px] border border-fault px-4 py-3 ${WRAP}`}>
           {message.content}
         </div>

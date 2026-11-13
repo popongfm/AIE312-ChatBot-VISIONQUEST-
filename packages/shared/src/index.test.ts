@@ -7,5 +7,5 @@ test('displayName prefers nickname', () => {
 });
 test('chat error copy is fixed Thai text', () => {
   expect(CHAT_ERROR_COPY.RATE_LIMITED).toBe('AI คิวเต็ม ลองใหม่ในอีกสักครู่');
-  expect(CHAT_ERROR_COPY.AI_ERROR).toBe('Oracle ขัดข้อง ลองใหม่อีกครั้ง');
+  expect(CHAT_ERROR_COPY.AI_ERROR).toBe('Vision ขัดข้อง ลองใหม่อีกครั้ง');
 });
