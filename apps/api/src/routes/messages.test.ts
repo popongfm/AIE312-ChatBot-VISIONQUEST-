@@ -107,7 +107,7 @@ describe.skipIf(!hasTestDb)('POST /api/conversations/:id/messages', () => {
     const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
     const app = appWith(fakeModel(['ครึ่ง', new AiError('boom')]));
     const res = await send(app, A, await newConversation(app), 'hi');
-    expect(parseSseText(res.text).at(-1)).toEqual({ type: 'error', code: 'AI_ERROR', message: 'Oracle ขัดข้อง ลองใหม่อีกครั้ง' });
+    expect(parseSseText(res.text).at(-1)).toEqual({ type: 'error', code: 'AI_ERROR', message: 'Vision ขัดข้อง ลองใหม่อีกครั้ง' });
     expect((await rows()).map((r) => r.role)).toEqual(['user']);
     expect(log).toHaveBeenCalled();
     log.mockRestore();

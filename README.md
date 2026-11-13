@@ -1,7 +1,7 @@
 # VISIONQUEST — Chat AI Portfolio
 
-เว็บ Portfolio ของกลุ่ม VISIONQUEST (AIE312 Final Project) ที่ผู้เยี่ยมชมคุยกับ AI ชื่อ **Oracle** ได้โดยตรง
-Oracle ตอบเรื่องทีมและสมาชิกแต่ละคนจากข้อมูลจริงในฐานข้อมูล บอกได้ว่าคำตอบอ้างถึงใคร และตอบว่า "ไม่มีข้อมูล" แทนการเดาเมื่อถามนอกเรื่อง
+เว็บ Portfolio ของกลุ่ม VISIONQUEST (AIE312 Final Project) ที่ผู้เยี่ยมชมคุยกับ AI ชื่อ **Vision** ได้โดยตรง
+Vision ตอบเรื่องทีมและสมาชิกแต่ละคนจากข้อมูลจริงในฐานข้อมูล บอกได้ว่าคำตอบอ้างถึงใคร และตอบว่า "ไม่มีข้อมูล" แทนการเดาเมื่อถามนอกเรื่อง
 
 **เว็บที่ deploy แล้ว:** https://visionquest-htn7.onrender.com
 (Render แบบฟรีจะหลับเมื่อไม่มีคนใช้ ครั้งแรกอาจโหลดช้าหลายสิบวินาที)
@@ -55,7 +55,7 @@ npm run seed -w @vq/api                   # โหลดข้อมูลจา
 npm run dev -w @vq/api                    # http://localhost:3000/api/health
 ```
 
-ขอ Gemini API key ได้ที่ https://aistudio.google.com ถ้าไม่ใส่ key ทุกอย่างยังใช้ได้ ยกเว้นแชตที่จะตอบว่า "Oracle ขัดข้อง"
+ขอ Gemini API key ได้ที่ https://aistudio.google.com ถ้าไม่ใส่ key ทุกอย่างยังใช้ได้ ยกเว้นแชตที่จะตอบว่า "Vision ขัดข้อง"
 
 ## ทดสอบ
 
@@ -65,9 +65,9 @@ npm run typecheck && npm run lint && npm test && npm run build
 
 `npm test` ใช้ฐานข้อมูล `visionquest_test` จาก `docker compose` (เทสต์ที่ต้องใช้ฐานข้อมูลจะถูกข้ามถ้าไม่มี `TEST_DATABASE_URL`)
 
-### AI eval (คุณภาพคำตอบของ Oracle)
+### AI eval (คุณภาพคำตอบของ Vision)
 
-ถาม Oracle จริง 12 ข้อ (ทีม 4, สมาชิกคนละ 2, คำถามนอกเรื่อง 2) แล้วตรวจว่าคำตอบอิงข้อมูลจริงหรือปฏิเสธได้ถูกต้อง ต้องผ่านอย่างน้อย 10/12
+ถาม Vision จริง 12 ข้อ (ทีม 4, สมาชิกคนละ 2, คำถามนอกเรื่อง 2) แล้วตรวจว่าคำตอบอิงข้อมูลจริงหรือปฏิเสธได้ถูกต้อง ต้องผ่านอย่างน้อย 10/12
 
 ```sh
 npm run eval -w @vq/api                                              # ใช้ฐานข้อมูลและ Gemini key ในเครื่อง

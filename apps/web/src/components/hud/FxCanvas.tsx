@@ -41,14 +41,24 @@ export function FxCanvas({ kind, label, className = '' }: { kind: FxKind; label?
       : null;
     observer?.observe(el);
 
+    // Scenes that react to the pointer read it from `state.pointer` (-1..1 across the canvas).
+    const onPointer = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') return;
+      const box = el.getBoundingClientRect();
+      if (box.width > 0 && box.height > 0) {
+        state.pointer = [((e.clientX - box.left) / box.width) * 2 - 1, ((e.clientY - box.top) / box.height) * 2 - 1];
+      }
+    };
+
     if (reduced) {
       paint(start);
       const onResize = () => paint(start);
       window.addEventListener('resize', onResize);
       return () => { window.removeEventListener('resize', onResize); observer?.disconnect(); };
     }
+    window.addEventListener('pointermove', onPointer, { passive: true });
     raf = requestAnimationFrame(frame);
-    return () => { cancelAnimationFrame(raf); observer?.disconnect(); };
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('pointermove', onPointer); observer?.disconnect(); };
   }, [kind, reduced]);
 
   return label

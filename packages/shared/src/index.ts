@@ -31,7 +31,7 @@ export interface ApiErrorBody { error: { code: string; message: string } }
 
 export const CHAT_ERROR_COPY: Record<ChatErrorCode, string> = {
   RATE_LIMITED: 'AI คิวเต็ม ลองใหม่ในอีกสักครู่',
-  AI_ERROR: 'Oracle ขัดข้อง ลองใหม่อีกครั้ง',
+  AI_ERROR: 'Vision ขัดข้อง ลองใหม่อีกครั้ง',
 };
 
 export function displayName(m: { name: string; nickname: string | null }): string {

@@ -19,7 +19,7 @@ export function Sidebar({ conversations, activeId, onSelect, onNew, onDelete }: 
   const pick = (action: () => void) => () => { action(); setOpen(false); };
 
   return (
-    <aside className="flex min-w-0 flex-col gap-4 border-b border-grid p-4 lg:sticky lg:top-0 lg:h-dvh lg:gap-5 lg:overflow-y-auto lg:border-r lg:border-b-0 lg:p-5">
+    <aside className="flex min-w-0 flex-col gap-4 border-b border-grid p-4 lg:sticky lg:top-0 lg:h-dvh lg:gap-5 lg:overflow-y-auto lg:border-r lg:border-b-0 lg:bg-void/70 lg:p-5 lg:backdrop-blur-md">
       <div className="flex items-center justify-between gap-3">
         <Link to="/" aria-label="VISIONQUEST หน้าแรก" className="glow-text flex min-h-11 min-w-0 items-center gap-3 font-display text-xl font-bold text-ghost no-underline">
           <Logo size={36} />

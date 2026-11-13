@@ -1,9 +1,10 @@
 import type { Team } from '@vq/shared';
+import { DecodeText } from '../hud/DecodeText';
 
 export function Concept({ team }: { team: Team }) {
   return (
-    <section id="team" aria-labelledby="concept-title" className="flex scroll-mt-6 flex-wrap gap-x-16 gap-y-6 py-16 sm:py-[72px]">
-      <h2 id="concept-title" className="flex-[1_1_280px] text-[clamp(1.75rem,4vw,2.5rem)] font-semibold">แนวคิดของทีม</h2>
+    <section id="team" aria-labelledby="concept-title" className="flex scroll-mt-24 flex-wrap gap-x-16 gap-y-6 py-16 sm:py-[72px]">
+      <h2 id="concept-title" className="flex-[1_1_280px] text-[clamp(1.75rem,4vw,2.5rem)] font-semibold"><DecodeText text="แนวคิดของทีม" /></h2>
       <div className="flex min-w-0 flex-[2_1_420px] flex-col gap-5">
         <p className="max-w-[62ch] text-lg">{team.concept ?? 'ยังไม่มีข้อมูลแนวคิดของทีม'}</p>
         {team.highlights.length > 0 && (

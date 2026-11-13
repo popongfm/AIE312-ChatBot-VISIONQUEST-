@@ -2,10 +2,10 @@
 
 /* Design tokens: see the team's UX/UI guideline (Foundations). */
 @theme {
-  --color-void: #0e1230;   /* page background */
-  --color-ink: #070918;    /* deeper than void: canvases, overlays */
-  --color-deck: #171c45;   /* panels, cards, AI answers */
-  --color-grid: #2b3470;   /* hairlines, quiet borders */
+  --color-void: #04050c;   /* page background: near black, so panels and glows stand out */
+  --color-ink: #000207;    /* deeper than void: canvases, overlays */
+  --color-deck: #0d1029;   /* panels, cards, AI answers */
+  --color-grid: #222a5c;   /* hairlines, quiet borders */
   --color-ghost: #eef0ff;  /* main text */
   --color-haze: #a9b0e0;   /* secondary text */
   --color-stone: #ffc83d;  /* the AI's voice, the one primary button */
@@ -29,7 +29,7 @@
   }
   body {
     margin: 0;
-    background: var(--color-void);
+    /* No background here: html paints it, so the fixed star field (z-index -10) shows through. */
     color: var(--color-ghost);
     font-family: var(--font-sans);
     line-height: 1.7;
@@ -172,6 +172,45 @@
     color: var(--color-haze);
   }
 
+  /* Entrance: content fades up the first time it scrolls into view (see Reveal). */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  [data-reveal][data-revealed] {
+    opacity: 1;
+    transform: none;
+  }
+  /* Member cards lift and glow under the pointer. drop-shadow follows the cut corner; box-shadow would be clipped. */
+  .card-hud {
+    transition: transform 0.25s ease, filter 0.25s ease;
+  }
+  .card-hud:hover, .card-hud:focus-within {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 0 16px rgb(88 224 232 / 0.55));
+  }
+  /* A light sweep across buttons on hover */
+  .btn-primary, .btn-secondary {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after, .btn-secondary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.5) 50%, transparent 65%);
+    transform: translateX(-120%);
+    pointer-events: none;
+  }
+  .btn-primary:hover::after, .btn-secondary:hover::after {
+    transform: translateX(120%);
+    transition: transform 0.6s ease;
+  }
+  .msg-in {
+    animation: vq-msg-in 0.32s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
   .vq-scan {
     animation: vq-scan 7s linear infinite;
   }
@@ -195,6 +234,9 @@
 @keyframes vq-scan {
   from { top: 0; }
   to { top: 100%; }
+}
+@keyframes vq-msg-in {
+  from { opacity: 0; transform: translateY(12px); }
 }
 @keyframes vq-blink {
   50% { opacity: 0; }

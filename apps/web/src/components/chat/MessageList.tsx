@@ -18,7 +18,7 @@ export function MessageList({ messages, streamingText, members }: Props) {
     <div aria-live="polite" className="flex flex-col gap-6">
       {messages.map((m) => <MessageBubble key={m.key} message={m} members={members} />)}
       {streamingText === '' && (
-        <div data-role="pending" className="flex justify-start">
+        <div data-role="pending" className="msg-in flex justify-start">
           <HudPanel tone="amber" className="relative flex items-center gap-2 overflow-hidden p-4 font-mono text-sm text-stone sm:p-5">
             <ScanLine active />
             <AiMark active />

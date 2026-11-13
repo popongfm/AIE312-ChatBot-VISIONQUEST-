@@ -25,7 +25,7 @@ export function Composer({ disabled, onSend }: { disabled: boolean; onSend(conte
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-2">
-      <label htmlFor="composer" className="sr-only">คำถามถึง Oracle</label>
+      <label htmlFor="composer" className="sr-only">คำถามถึง Vision</label>
       <div className="flex flex-wrap items-stretch gap-3">
         <div className="glow-signal flex min-w-0 flex-[999_1_220px] items-start gap-3 rounded-[2px] border border-signal bg-deck px-4 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-signal">
           <span aria-hidden="true" className="pt-[13px] font-mono text-lg text-stone">›</span>

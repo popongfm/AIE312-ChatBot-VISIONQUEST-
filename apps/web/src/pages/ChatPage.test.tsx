@@ -67,7 +67,7 @@ test('empty chat offers suggested questions, one per member; picking one sends i
 
 test('Enter sends, Shift+Enter adds a newline, and the caption is shown', async () => {
   renderAt('/chat');
-  const box = await screen.findByRole('textbox', { name: 'คำถามถึง Oracle' });
+  const box = await screen.findByRole('textbox', { name: 'คำถามถึง Vision' });
   await userEvent.type(box, 'บรรทัดหนึ่ง{Shift>}{Enter}{/Shift}บรรทัดสอง');
   expect(mocked.sendMessage).not.toHaveBeenCalled();
   expect(box).toHaveValue('บรรทัดหนึ่ง\nบรรทัดสอง');
@@ -85,7 +85,7 @@ test('shows analyzing… and locks the composer until the first token arrives', 
     return { completed: true };
   });
   renderAt('/chat');
-  const box = await screen.findByRole('textbox', { name: 'คำถามถึง Oracle' });
+  const box = await screen.findByRole('textbox', { name: 'คำถามถึง Vision' });
   await userEvent.type(box, 'hi{Enter}');
   expect(await screen.findByText('analyzing…')).toBeInTheDocument();
   expect(box).toBeDisabled();
