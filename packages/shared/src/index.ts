@@ -23,6 +23,8 @@ export interface Message { id: number; role: Role; content: string; citedMembers
 export type ChatErrorCode = 'RATE_LIMITED' | 'AI_ERROR';
 export type ChatStreamEvent =
   | { type: 'token'; text: string }
+  /** The model failed mid-answer and is starting over: discard the tokens received so far. */
+  | { type: 'reset' }
   | { type: 'done'; messageId: number; citedMembers: string[] }
   | { type: 'error'; code: ChatErrorCode; message: string };
 export interface ApiErrorBody { error: { code: string; message: string } }

@@ -117,6 +117,10 @@ export function conversationsRouter({ pool, chatModel }: AppDeps) {
         systemInstruction: buildSystemInstruction(data),
         history: buildHistory(prior, content),
         signal: abort.signal,
+        onRestart: () => {
+          answer = '';
+          sendEvent(res, { type: 'reset' });
+        },
       });
       for await (const text of stream) {
         answer += text;
