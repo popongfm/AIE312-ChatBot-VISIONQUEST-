@@ -3,7 +3,7 @@
 /* Design tokens: see the team's UX/UI guideline (Foundations). */
 @theme {
   --color-void: #04050c;   /* page background: near black, so panels and glows stand out */
-  --color-ink: #000207;    /* deeper than void: canvases, overlays */
+  --color-ink: #000207;    /* deeper than void: canvases, overlays test commit*/ 
   --color-deck: #0d1029;   /* panels, cards, AI answers */
   --color-grid: #222a5c;   /* hairlines, quiet borders */
   --color-ghost: #eef0ff;  /* main text */
