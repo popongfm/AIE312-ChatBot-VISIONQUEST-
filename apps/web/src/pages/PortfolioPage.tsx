@@ -65,7 +65,7 @@ export function PortfolioPage() {
           <a href="#members" className={NAV_LINK}>สมาชิก</a>
           <a href="#work" className={NAV_LINK}>ผลงาน</a>
           <a href="#contact" className={NAV_LINK}>ติดต่อ</a>
-          <Link to="/chat" className="btn-primary h-12 px-6 text-[17px]">คุยกับ Vision</Link>
+          <Link to="/chat" className="btn-primary h-12 px-6 text-[17px]">คุยกับ WhiteVision</Link>
         </div>
       </nav>
 
